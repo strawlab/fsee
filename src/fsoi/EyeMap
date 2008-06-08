@@ -1,0 +1,32 @@
+/* -*-c++-*- 
+*/
+
+#ifndef FSOI_EYEMAP
+#define FSOI_EYEMAP
+
+// blank for now...
+#define FOSI_EM_EXPORT
+
+#include <osg/Array>
+#include <osg/Geode>
+#include <vector>
+
+class FOSI_EM_EXPORT EyeMap: public osg::Geode
+{
+public:
+  /** constructor */
+  EyeMap( );
+  /*osg::Vec3Array* coords, 
+	  osg::UIntArray* tristrip_coordIndices,
+	  osg::UIntArray* edge_line_coordIndices);*/
+  void setColors(osg::Vec4Array* cs);
+  void setGeometry( osg::Vec3Array* verts, osg::ByteArray* fan_lengths );
+private:
+  void createDrawables();
+  osg::ref_ptr<osg::Geometry> faces;
+  osg::ref_ptr<osg::Vec4Array> _colors;
+  osg::ref_ptr<osg::Vec3Array> _verts;
+  osg::ref_ptr<osg::ByteArray> _fan_lengths;
+};
+
+#endif

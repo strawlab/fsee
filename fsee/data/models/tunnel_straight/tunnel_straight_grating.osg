@@ -1,0 +1,205 @@
+Group {
+  UniqueID osgwriterGroup_2AAAAF32B5A8
+  DataVariance DYNAMIC
+  name "osgwriterFile"
+  cullingActive TRUE
+  num_children 1
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    name "osgwriterMatrixTransform"
+    Matrix {
+      DataVariance DYNAMIC
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      0 0 0 1
+    }
+    num_children 1
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 5
+      StateSet {
+        GL_LIGHTING OFF
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "grating.png"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          -9.5 0.14999999999999999 -0.14999999999999999
+          -9.5 0.14999999999999999 0.14999999999999999
+          0.5 0.14999999999999999 0.14999999999999999
+          0.5 0.14999999999999999 -0.14999999999999999
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "grating.png"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          -9.5 -0.14999999999999999 -0.14999999999999999
+          -9.5 -0.14999999999999999 0.14999999999999999
+          0.5 -0.14999999999999999 0.14999999999999999
+          0.5 -0.14999999999999999 -0.14999999999999999
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "grating.png"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.5 0.14999999999999999 -0.14999999999999999
+          0.5 0.14999999999999999 0.14999999999999999
+          10.5 0.14999999999999999 0.14999999999999999
+          10.5 0.14999999999999999 -0.14999999999999999
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "grating.png"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.5 -0.14999999999999999 -0.14999999999999999
+          0.5 -0.14999999999999999 0.14999999999999999
+          10.5 -0.14999999999999999 0.14999999999999999
+          10.5 -0.14999999999999999 -0.14999999999999999
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,379 @@
+Group {
+    UniqueID RootBlenderGroup
+    DataVariance DYNAMIC
+    name "BlenderFile"
+    cullingActive TRUE
+    num_children 1
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    num_children 1
+    name "Cube.003"
+    Matrix {
+             DataVariance DYNAMIC
+             -0.541025519371 -0.259405821562 0.0 0.0
+             0.259405821562 -0.541025519371 0.0 0.0
+             0.0 0.0 0.600000023842 0.0
+             65.7700119019 19.2050361633 -1.29481101036 1.0
+    }
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+    StateSet {
+       DataVariance STATIC
+       rendering_hint DEFAULT_BIN
+       renderBinMode INHERIT
+       textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "random.png"
+            wrap_s REPEAT
+            wrap_t REPEAT
+            wrap_r CLAMP
+            min_filter LINEAR_MIPMAP_LINEAR
+            mag_filter NEAREST
+            maxAnisotropy 1
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+          }
+       }
+    }
+    VertexArray 8 {
+              92.5048980713 -2.50045895576 5.97180366516
+              92.5048980713 -2.50045919418 -0.0281966552138
+              -105.071258545 -2.50045919418 -0.0281964167953
+              -105.071220398 -2.50045895576 5.97180509567
+              -101.35974884 2.46794271469 5.97174882889
+              -101.359786987 2.46794271469 -0.0282526630908
+              96.2163696289 2.46794271469 -0.0282529015094
+              96.2163696289 2.46794271469 5.97174739838
+    }
+    NormalBinding PER_VERTEX
+    NormalArray 8 {
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+    }
+    PrimitiveSets 1 {
+        DrawElementsUInt QUADS 2 {
+            0 1 2 3
+            5 6 7 4
+        }
+    }
+    TexCoordArray 0 Vec2Array 8 {
+              1.0 0.0
+              1.0 0.5
+              0.0 0.5
+              0.0 0.0
+              0.0 1.0
+              0.0 0.5
+              1.0 0.5
+              1.0 1.0
+    }
+      }
+    }
+  }
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    num_children 1
+    name "Cube.002"
+    Matrix {
+             DataVariance DYNAMIC
+             -0.349638342857 0.487599283457 0.0 0.0
+             -0.487599283457 -0.349638342857 0.0 0.0
+             0.0 0.0 0.600000023842 0.0
+             43.4166259766 -45.1716003418 -1.29481101036 1.0
+    }
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+    StateSet {
+       DataVariance STATIC
+       rendering_hint DEFAULT_BIN
+       renderBinMode INHERIT
+       textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "random.png"
+            wrap_s REPEAT
+            wrap_t REPEAT
+            wrap_r CLAMP
+            min_filter LINEAR_MIPMAP_LINEAR
+            mag_filter NEAREST
+            maxAnisotropy 1
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+          }
+       }
+    }
+    VertexArray 8 {
+              281.192871094 -2.37439131737 5.97180366516
+              281.192871094 -2.37439155579 -0.0281964000314
+              83.6166992188 -2.37439155579 -0.0281961616129
+              83.6167297363 -2.37439131737 5.97180509567
+              -101.35974884 2.46794271469 5.97174882889
+              -101.359786987 2.46794271469 -0.0282526630908
+              96.2163696289 2.46794271469 -0.0282529015094
+              96.2163696289 2.46794271469 5.97174739838
+    }
+    NormalBinding PER_VERTEX
+    NormalArray 8 {
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+    }
+    PrimitiveSets 1 {
+        DrawElementsUInt QUADS 2 {
+            0 1 2 3
+            5 6 7 4
+        }
+    }
+    TexCoordArray 0 Vec2Array 8 {
+              1.0 0.0
+              1.0 0.5
+              0.0 0.5
+              0.0 0.0
+              0.0 1.0
+              0.0 0.5
+              1.0 0.5
+              1.0 1.0
+    }
+      }
+    }
+  }
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    num_children 1
+    name "Cube.001"
+    Matrix {
+             DataVariance DYNAMIC
+             -0.557739019394 -0.221195027232 0.0 0.0
+             0.221195027232 -0.557739019394 0.0 0.0
+             0.0 0.0 0.600000023842 0.0
+             59.0180282593 22.0194149017 -1.29481101036 1.0
+    }
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+    StateSet {
+       DataVariance STATIC
+       rendering_hint DEFAULT_BIN
+       renderBinMode INHERIT
+       textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "random.png"
+            wrap_s REPEAT
+            wrap_t REPEAT
+            wrap_r CLAMP
+            min_filter LINEAR_MIPMAP_LINEAR
+            mag_filter NEAREST
+            maxAnisotropy 1
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+          }
+       }
+    }
+    VertexArray 8 {
+              98.9444198608 -2.06200361252 5.97180366516
+              98.9444198608 -2.06200385094 -0.0281966552138
+              -98.6317367554 -2.06200385094 -0.0281964167953
+              -98.6316986084 -2.06200361252 5.97180509567
+              91.1795043945 1.83800458908 5.97174882889
+              91.179473877 1.83800458908 -0.0282526649535
+              288.755615234 1.83800458908 -0.028252903372
+              288.755615234 1.83800458908 5.97174739838
+    }
+    NormalBinding PER_VERTEX
+    NormalArray 8 {
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+    }
+    PrimitiveSets 1 {
+        DrawElementsUInt QUADS 2 {
+            0 1 2 3
+            5 6 7 4
+        }
+    }
+    TexCoordArray 0 Vec2Array 8 {
+              1.0 0.0
+              1.0 0.5
+              0.0 0.5
+              0.0 0.0
+              0.0 1.0
+              0.0 0.5
+              1.0 0.5
+              1.0 1.0
+    }
+      }
+    }
+  }
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    num_children 1
+    name "Plane"
+    Matrix {
+             DataVariance DYNAMIC
+             -1.52602922916 -2.30424006986e-07 0.0 0.0
+             2.42677430151e-07 -1.60717999935 0.0 0.0
+             0.0 0.0 1.60717999935 0.0
+             1.86570334435 -18.2501716614 -1.57283568382 1.0
+    }
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+    StateSet {
+       DataVariance STATIC
+       rendering_hint DEFAULT_BIN
+       renderBinMode INHERIT
+       textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "rocks.jpg"
+            wrap_s REPEAT
+            wrap_t REPEAT
+            wrap_r CLAMP
+            min_filter LINEAR_MIPMAP_LINEAR
+            mag_filter LINEAR
+            maxAnisotropy 1
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+          }
+       }
+    }
+    VertexArray 4 {
+              98.8560943604 98.8560714722 0.0
+              98.8560943604 -98.8561172485 0.0
+              -98.8560943604 -98.8560943604 0.0
+              -98.8560409546 98.8561172485 0.0
+    }
+    NormalBinding PER_VERTEX
+    NormalArray 4 {
+              0.0 0.0 1.0
+              0.0 0.0 1.0
+              0.0 0.0 1.0
+              0.0 0.0 1.0
+    }
+    PrimitiveSets 1 {
+        DrawElementsUInt QUADS 1 {
+            0 3 2 1
+        }
+    }
+    TexCoordArray 0 Vec2Array 4 {
+              0.0 1.0
+              1.0 1.0
+              1.0 0.20129108429
+              0.0 0.20129108429
+    }
+      }
+    }
+  }
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    num_children 1
+    name "Cube"
+    Matrix {
+             DataVariance DYNAMIC
+             -0.600000023842 -9.05974886223e-08 0.0 0.0
+             9.05974886223e-08 -0.600000023842 0.0 0.0
+             0.0 0.0 0.600000023842 0.0
+             -55.8960952759 0.0834277868271 -1.29481077194 1.0
+    }
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+    StateSet {
+       DataVariance STATIC
+       rendering_hint DEFAULT_BIN
+       renderBinMode INHERIT
+       textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "random.png"
+            wrap_s REPEAT
+            wrap_t REPEAT
+            wrap_r CLAMP
+            min_filter LINEAR_MIPMAP_LINEAR
+            mag_filter NEAREST
+            maxAnisotropy 1
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+          }
+       }
+    }
+    VertexArray 8 {
+              98.7880783081 -1.99999988079 5.99999952316
+              98.7880783081 -2.0 -7.15255737305e-07
+              -98.7880783081 -2.0 -4.76837158203e-07
+              -98.7880401611 -1.99999988079 6.00000095367
+              -98.7880401611 2.0 6.00000095367
+              -98.7880783081 2.0 -4.76837158203e-07
+              98.7880783081 2.0 -7.15255737305e-07
+              98.7880783081 2.0 5.99999952316
+    }
+    NormalBinding PER_VERTEX
+    NormalArray 8 {
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+              0.0 -1.0 0.0
+    }
+    PrimitiveSets 1 {
+        DrawElementsUInt QUADS 2 {
+            0 1 2 3
+            5 6 7 4
+        }
+    }
+    TexCoordArray 0 Vec2Array 8 {
+              1.0 0.0
+              1.0 0.5
+              0.0 0.5
+              0.0 0.0
+              0.0 1.0
+              0.0 0.5
+              1.0 0.5
+              1.0 1.0
+    }
+      }
+    }
+  }
+}

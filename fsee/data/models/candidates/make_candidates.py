@@ -1,0 +1,1 @@
+../../../../../sandbox/auto_scene_gen/make_candidates.py

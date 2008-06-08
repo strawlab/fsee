@@ -1,0 +1,135 @@
+Group {
+    UniqueID RootBlenderGroup
+    DataVariance DYNAMIC
+    name "BlenderFile"
+    cullingActive TRUE
+    num_children 1
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    num_children 1
+    name "Plane"
+    Matrix {
+             DataVariance DYNAMIC
+             -1.52602922916 -2.30424006986e-07 0.0 0.0
+             2.42677430151e-07 -1.60717999935 0.0 0.0
+             0.0 0.0 1.60717999935 0.0
+             1.86570334435 -18.2501716614 -1.57283568382 1.0
+    }
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+    StateSet {
+       DataVariance STATIC
+       rendering_hint DEFAULT_BIN
+       renderBinMode INHERIT
+       textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "rocks.jpg"
+            wrap_s REPEAT
+            wrap_t REPEAT
+            wrap_r CLAMP
+            min_filter LINEAR_MIPMAP_LINEAR
+            mag_filter LINEAR
+            maxAnisotropy 1
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+          }
+       }
+    }
+    VertexArray 4 {
+              98.8560943604 98.8560714722 0.0
+              98.8560943604 -98.8561172485 0.0
+              -98.8560943604 -98.8560943604 0.0
+              -98.8560409546 98.8561172485 0.0
+    }
+    NormalBinding PER_VERTEX
+    NormalArray 4 {
+              0.0 0.0 1.0
+              0.0 0.0 1.0
+              0.0 0.0 1.0
+              0.0 0.0 1.0
+    }
+    PrimitiveSets 1 {
+        DrawElementsUInt QUADS 1 {
+            0 3 2 1
+        }
+    }
+    TexCoordArray 0 Vec2Array 4 {
+              0.0 1.0
+              1.0 1.0
+              1.0 0.20129108429
+              0.0 0.20129108429
+    }
+      }
+    }
+  }
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    num_children 1
+    name "Cube"
+    Matrix {
+             DataVariance DYNAMIC
+             -0.600000023842 -9.05974886223e-08 0.0 0.0
+             9.05974886223e-08 -0.600000023842 0.0 0.0
+             0.0 0.0 0.600000023842 0.0
+             0.151958465576 0.0834277868271 -1.29481077194 1.0
+    }
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+    StateSet {
+       DataVariance STATIC
+       rendering_hint DEFAULT_BIN
+       renderBinMode INHERIT
+       textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "random.png"
+            wrap_s REPEAT
+            wrap_t REPEAT
+            wrap_r CLAMP
+            min_filter LINEAR_MIPMAP_LINEAR
+            mag_filter NEAREST
+            maxAnisotropy 1
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+          }
+       }
+    }
+    VertexArray 4 {
+              98.7880783081 -1.99999988079 5.99999952316
+              98.7880783081 -2.0 -7.15255737305e-07
+              -98.7880783081 -2.0 -4.76837158203e-07
+              -98.7880401611 -1.99999988079 6.00000095367
+    }
+    NormalBinding PER_VERTEX
+    NormalArray 4 {
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+              0.0 1.0 0.0
+    }
+    PrimitiveSets 1 {
+        DrawElementsUInt QUADS 1 {
+            0 1 2 3
+        }
+    }
+    TexCoordArray 0 Vec2Array 4 {
+              1.0 0.0
+              1.0 0.5
+              0.0 0.5
+              0.0 0.0
+    }
+      }
+    }
+  }
+}

@@ -1,0 +1,1694 @@
+Group {
+  UniqueID osgwriterGroup_2B711ACA03F8
+  DataVariance DYNAMIC
+  name "osgwriterFile"
+  cullingActive TRUE
+  num_children 1
+  MatrixTransform {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    referenceFrame RELATIVE_TO_PARENTS
+    name "osgwriterMatrixTransform"
+    Matrix {
+      DataVariance DYNAMIC
+      1.0 0.0 0.0 0.0
+      0.0 1.0 0.0 0.0
+      0.0 0.0 1.0 0.0
+      0.0 0.0 0.0 1.0
+    }
+    num_children 1
+    Geode {
+      DataVariance DYNAMIC
+      cullingActive TRUE
+      StateSet {
+        GL_LIGHTING OFF
+      }
+      num_drawables 37
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "WT_floor.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.0 0.0 0
+          0.0 0.29999999999999999 0
+          0.80000000000000004 0.29999999999999999 0
+          0.80000000000000004 0.0 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 0 1
+          0 0 1
+          0 0 1
+          0 0 1
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "WT_y+2.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.0 0.29999999999999999 0
+          0.0 0.29999999999999999 0.29999999999999999
+          0.80000000000000004 0.29999999999999999 0.29999999999999999
+          0.80000000000000004 0.29999999999999999 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "WT_y-2.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.0 0 0
+          0.0 0 0.29999999999999999
+          0.80000000000000004 0 0.29999999999999999
+          0.80000000000000004 0 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "WT_grill2.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.80000000000000004 0.29999999999999999 0
+          0.80000000000000004 0.29999999999999999 0.29999999999999999
+          0.80000000000000004 0 0.29999999999999999
+          0.80000000000000004 0 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          1 0 0
+          1 0 0
+          1 0 0
+          1 0 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "WT_grill2.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.0 0.29999999999999999 0
+          0.0 0.29999999999999999 0.29999999999999999
+          0.0 0 0.29999999999999999
+          0.0 0 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          1 0 0
+          1 0 0
+          1 0 0
+          1 0 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.405 0.15 0
+          0.405 0.15 0.20000000000000001
+          0.404903926402 0.15097545161 0.20000000000000001
+          0.404903926402 0.15097545161 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.404903926402 0.15097545161 0
+          0.404903926402 0.15097545161 0.20000000000000001
+          0.404619397663 0.151913417162 0.20000000000000001
+          0.404619397663 0.151913417162 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.404619397663 0.151913417162 0
+          0.404619397663 0.151913417162 0.20000000000000001
+          0.404157348062 0.152777851165 0.20000000000000001
+          0.404157348062 0.152777851165 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.404157348062 0.152777851165 0
+          0.404157348062 0.152777851165 0.20000000000000001
+          0.403535533906 0.153535533906 0.20000000000000001
+          0.403535533906 0.153535533906 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.403535533906 0.153535533906 0
+          0.403535533906 0.153535533906 0.20000000000000001
+          0.402777851165 0.154157348062 0.20000000000000001
+          0.402777851165 0.154157348062 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.402777851165 0.154157348062 0
+          0.402777851165 0.154157348062 0.20000000000000001
+          0.401913417162 0.154619397663 0.20000000000000001
+          0.401913417162 0.154619397663 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.401913417162 0.154619397663 0
+          0.401913417162 0.154619397663 0.20000000000000001
+          0.40097545161 0.154903926402 0.20000000000000001
+          0.40097545161 0.154903926402 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.40097545161 0.154903926402 0
+          0.40097545161 0.154903926402 0.20000000000000001
+          0.4 0.155 0.20000000000000001
+          0.4 0.155 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.4 0.155 0
+          0.4 0.155 0.20000000000000001
+          0.39902454839 0.154903926402 0.20000000000000001
+          0.39902454839 0.154903926402 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.39902454839 0.154903926402 0
+          0.39902454839 0.154903926402 0.20000000000000001
+          0.398086582838 0.154619397663 0.20000000000000001
+          0.398086582838 0.154619397663 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.398086582838 0.154619397663 0
+          0.398086582838 0.154619397663 0.20000000000000001
+          0.397222148835 0.154157348062 0.20000000000000001
+          0.397222148835 0.154157348062 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.397222148835 0.154157348062 0
+          0.397222148835 0.154157348062 0.20000000000000001
+          0.396464466094 0.153535533906 0.20000000000000001
+          0.396464466094 0.153535533906 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.396464466094 0.153535533906 0
+          0.396464466094 0.153535533906 0.20000000000000001
+          0.395842651938 0.152777851165 0.20000000000000001
+          0.395842651938 0.152777851165 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.395842651938 0.152777851165 0
+          0.395842651938 0.152777851165 0.20000000000000001
+          0.395380602337 0.151913417162 0.20000000000000001
+          0.395380602337 0.151913417162 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.395380602337 0.151913417162 0
+          0.395380602337 0.151913417162 0.20000000000000001
+          0.395096073598 0.15097545161 0.20000000000000001
+          0.395096073598 0.15097545161 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.395096073598 0.15097545161 0
+          0.395096073598 0.15097545161 0.20000000000000001
+          0.395 0.15 0.20000000000000001
+          0.395 0.15 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.395 0.15 0
+          0.395 0.15 0.20000000000000001
+          0.395096073598 0.14902454839 0.20000000000000001
+          0.395096073598 0.14902454839 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.395096073598 0.14902454839 0
+          0.395096073598 0.14902454839 0.20000000000000001
+          0.395380602337 0.148086582838 0.20000000000000001
+          0.395380602337 0.148086582838 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.395380602337 0.148086582838 0
+          0.395380602337 0.148086582838 0.20000000000000001
+          0.395842651938 0.147222148835 0.20000000000000001
+          0.395842651938 0.147222148835 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.395842651938 0.147222148835 0
+          0.395842651938 0.147222148835 0.20000000000000001
+          0.396464466094 0.146464466094 0.20000000000000001
+          0.396464466094 0.146464466094 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.396464466094 0.146464466094 0
+          0.396464466094 0.146464466094 0.20000000000000001
+          0.397222148835 0.145842651938 0.20000000000000001
+          0.397222148835 0.145842651938 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.397222148835 0.145842651938 0
+          0.397222148835 0.145842651938 0.20000000000000001
+          0.398086582838 0.145380602337 0.20000000000000001
+          0.398086582838 0.145380602337 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.398086582838 0.145380602337 0
+          0.398086582838 0.145380602337 0.20000000000000001
+          0.39902454839 0.145096073598 0.20000000000000001
+          0.39902454839 0.145096073598 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.39902454839 0.145096073598 0
+          0.39902454839 0.145096073598 0.20000000000000001
+          0.4 0.145 0.20000000000000001
+          0.4 0.145 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.4 0.145 0
+          0.4 0.145 0.20000000000000001
+          0.40097545161 0.145096073598 0.20000000000000001
+          0.40097545161 0.145096073598 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.40097545161 0.145096073598 0
+          0.40097545161 0.145096073598 0.20000000000000001
+          0.401913417162 0.145380602337 0.20000000000000001
+          0.401913417162 0.145380602337 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.401913417162 0.145380602337 0
+          0.401913417162 0.145380602337 0.20000000000000001
+          0.402777851165 0.145842651938 0.20000000000000001
+          0.402777851165 0.145842651938 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.402777851165 0.145842651938 0
+          0.402777851165 0.145842651938 0.20000000000000001
+          0.403535533906 0.146464466094 0.20000000000000001
+          0.403535533906 0.146464466094 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.403535533906 0.146464466094 0
+          0.403535533906 0.146464466094 0.20000000000000001
+          0.404157348062 0.147222148835 0.20000000000000001
+          0.404157348062 0.147222148835 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.404157348062 0.147222148835 0
+          0.404157348062 0.147222148835 0.20000000000000001
+          0.404619397663 0.148086582838 0.20000000000000001
+          0.404619397663 0.148086582838 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.404619397663 0.148086582838 0
+          0.404619397663 0.148086582838 0.20000000000000001
+          0.404903926402 0.14902454839 0.20000000000000001
+          0.404903926402 0.14902454839 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+      Geometry {
+        StateSet {
+          DataVariance STATIC
+          rendering_hint DEFAULT_BIN
+          renderBinMode INHERIT
+          textureUnit 0 {
+            GL_TEXTURE_2D ON
+            Texture2D {
+              DataVariance STATIC
+              file "black.jpg"
+              wrap_s REPEAT
+              wrap_t REPEAT
+              wrap_r CLAMP
+              min_filter LINEAR_MIPMAP_LINEAR
+              mag_filter LINEAR
+              maxAnisotropy 1
+              internalFormatMode USE_IMAGE_DATA_FORMAT
+            }
+          }
+        }
+        VertexArray 4 {
+          0.404903926402 0.14902454839 0
+          0.404903926402 0.14902454839 0.20000000000000001
+          0.405 0.15 0.20000000000000001
+          0.405 0.15 0
+        }
+        NormalBinding PER_VERTEX
+        NormalArray 4 {
+          0 1 0
+          0 1 0
+          0 1 0
+          0 1 0
+        }
+        PrimitiveSets 1 {
+          DrawElementsUInt QUADS 1 {
+            0 1 2 3
+          }
+        }
+        TexCoordArray 0 Vec2Array 4 {
+          0 0
+          0 1
+          1 1
+          1 0
+        }
+      }
+    }
+  }
+}

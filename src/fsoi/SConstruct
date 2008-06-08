@@ -1,0 +1,52 @@
+# emacs, this is -*-Python-*- mode
+import sys, os
+
+debug = 1#ARGUMENTS.get('debug', 0)
+
+env = Environment()#ENV = os.environ)
+if int(debug):
+    env.Append(CCFLAGS = '-g')
+
+def add_osg_opts(kws):
+    if sys.platform.startswith('darwin'):
+        kws.setdefault('LINKFLAGS',[]).extend('-framework osg -framework OpenThreads -framework osgText -framework osgDB -framework osgUtil -framework osgGA -framework osgViewer'.split())
+        kws.setdefault('CPPDEFINES',{}).update({'__USE_OSX_CGL_IMPLEMENTATION__':None})
+        #kws.setdefault('CPPDEFINES',{}).update({'__USE_OSX_AGL_IMPLEMENTATION__':None})
+    else:
+        kws.setdefault('LIBS',[]).extend(['osgDB', 'osgUtil', 'osg', 'osgViewer',])
+    return kws
+
+if 1:
+
+    if 1:
+        sodict = {}
+        add_osg_opts(sodict)
+
+        sodict['target'] = '../../fsee/fsoi_ng'
+        sodict['source'] = ['fsoi_ng.cpp','EyeMap.cpp']
+
+        if sys.platform.startswith('win'):
+            sodict.setdefault('CPPDEFINES',{}).update({'FSOI_NG_DLL':None,
+                                                       'FSOI_NG_EXPORTS':None,
+                                                       })
+
+        USE_SKYBOX = True
+
+        if USE_SKYBOX:
+            sodict.setdefault('CPPDEFINES',{}).update({'USE_SKYBOX':None})
+            sodict['source'].append('skybox.cpp')
+
+        lib_fsoi_ng = env.SharedLibrary(**sodict)
+
+        env.Program(target='fsoi_ng_test',
+                    source=['fsoi_ng_test.c'],
+                    #LIBS=['fsoi_ng'],
+                    LIBS=[lib_fsoi_ng],
+                    )
+    else:
+        prog_kws = {}
+        add_osg_opts(prog_kws)
+        env.Program(target='fsoi_ng_test',
+                    source=['fsoi_ng_test.c'],#,'skybox.cpp'],
+                    **prog_kws
+                    )
