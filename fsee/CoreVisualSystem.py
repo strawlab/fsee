@@ -12,6 +12,8 @@ import scipy
 import math
 from math import pi
 
+import fsee.eye_geometry.switcher
+
 ##def get_orientation_quat(eye,center,up):
 ##    """find quaternion that rotates default OSG orientation to view direction"""
 ##    # XXX this doesn't appear to work yet...
@@ -146,13 +148,7 @@ class CoreVisualSystem:
                  optics=None,
                  do_luminance_adaptation=None,
                  ):
-
-        if optics == 'synthetic':
-            import fsee.eye_geometry.precomputed as precomputed
-        elif optics == 'buchner71':
-            import fsee.eye_geometry.precomputed_buchner_1971 as precomputed
-        else:
-            raise ValueError("must specify optics (as 'synthetic' or 'buchner71')")
+        precomputed = fsee.eye_geometry.switcher.get_module_for_optics(optics=optics)
 
         self.optics = optics
         self.precomputed_optics_module = precomputed
@@ -189,7 +185,7 @@ class CoreVisualSystem:
         if self.debug:
             self.responses_fd = open('01_retina.txt','wb')
 
-        self.rweights = precomputed.receptor_weight_matrix
+        self.rweights = precomputed.receptor_weight_matrix_64.astype(numpy.float32)
 
         emd_edges = precomputed.edges
 

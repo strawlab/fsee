@@ -4,14 +4,13 @@ import cgkit.cgtypes as cgtypes # cgkit 2.x
 import fsee
 from fsee.CoreVisualSystem import CoreVisualSystem
 from fsee.eye_geometry.projected_eye_coords import RapidPlotter
+import fsee.eye_geometry.switcher
 
 import os
 if int(os.environ.get('FSEE_MULTIPROCESS','0')):
     import fsee.FlySimWrapFSOI as Simulation
 else:
     import fsee.RealFSOI as Simulation
-
-import fsee.eye_geometry.precomputed as precomputed
 
 import numpy
 
@@ -89,6 +88,7 @@ class Observer: # almost a sub-class of CoreVisualSystem
                                     optics=optics,
                                     do_luminance_adaptation=do_luminance_adaptation,
                                     )
+        precomputed = fsee.eye_geometry.switcher.get_module_for_optics(optics=optics)
         for attr in ['get_last_emd_outputs',
                      'get_last_retinal_imageR',
                      'get_last_retinal_imageG',

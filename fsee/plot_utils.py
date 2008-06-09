@@ -12,6 +12,7 @@ import cgkit.cgtypes as cgtypes # cgkit 2
 import numpy
 
 import fsee.eye_geometry.util
+import fsee.eye_geometry.switcher
 
 # XXX I could refactor this to make basemap required only in a
 # precomputation step.
@@ -50,12 +51,7 @@ class BasemapInstanceWrapper:
                 raise ValueError('if optics is specified, then '
                                  'receptor_dirs, edges, and hex_faces '
                                  'cannot be.')
-            if optics == 'synthetic':
-                import fsee.eye_geometry.precomputed as precomputed
-            elif optics == 'buchner71':
-                import fsee.eye_geometry.precomputed_buchner_1971 as precomputed
-            else:
-                raise ValueError("unknown optics")
+            precomputed = fsee.eye_geometry.switcher.get_module_for_optics(optics=optics)
 
             self.rdirs = precomputed.receptor_dirs
             self.edges = precomputed.edges
