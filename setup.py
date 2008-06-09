@@ -73,7 +73,7 @@ fsee_package_data.append( prefix+extension)
 
 package_data = {'fsee':fsee_package_data}
 
-package_data['fsee.eye_geometry']=['*.ashelf']
+package_data['fsee.eye_geometry']=['*.mat','*.m']
 
 eager_files = [ 'fsee/'+f for f in fsee_package_data ]
 
