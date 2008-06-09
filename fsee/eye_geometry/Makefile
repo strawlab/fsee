@@ -22,7 +22,7 @@ buchner71: $(buchner71_products)
 $(synthetic_products): precompute_synthetic_optics.py
 	python precompute_synthetic_optics.py
 
-$(buchner71_products): precompute_buchner71_optics.py
+$(buchner71_products): precompute_buchner71_optics.py precompute_synthetic_optics.py
 	python precompute_buchner71_optics.py
 
 .PHONY: clean eye_geometry_data_files default synthetic buchner71
