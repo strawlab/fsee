@@ -20,7 +20,7 @@ backend_fullpath = pkg_resources.resource_filename(__name__,backend_fname)
 
 ############################
 # import shared library
-    
+
 if sys.platform.startswith('linux'):
     c_fsoi_ng = ctypes.cdll.LoadLibrary(backend_fullpath)
 elif sys.platform.startswith('win'):
@@ -35,7 +35,7 @@ else:
 
 class FsoiObj(ctypes.Structure):
     _fields_ = [('the_cpp_obj',ctypes.c_void_p),]
-                
+
 c_fsoi_ng.fsoi_ng_init.restype = ctypes.c_int
 c_fsoi_ng.fsoi_ng_init.argtypes = []
 
@@ -48,9 +48,9 @@ c_fsoi_ng.fsoi_ng_new.argtypes = [ctypes.POINTER(ctypes.POINTER(FsoiObj)),
                                   ctypes.c_double, # scale
                                   ctypes.c_char_p, # skybox_basename
                                   ctypes.c_double, # im_xang
-                                  ctypes.c_double, # 
+                                  ctypes.c_double, #
                                   ctypes.c_double, # near
-                                  ctypes.c_double, # 
+                                  ctypes.c_double, #
                                   ctypes.c_int, # width
                                   ctypes.c_int, # height
                                   ctypes.c_char_p, # render_implementation
@@ -120,7 +120,7 @@ def CHK(m):
         raise FSOIError('error: %d'%(m,))
 
 CHK(c_fsoi_ng.fsoi_ng_init())
-    
+
 class Simulation:
     def __init__(self,
                  model_path=None,
@@ -133,7 +133,7 @@ class Simulation:
                  zmin=0.001,
                  zmax=1e10):
         self.fsoi = ctypes.pointer(FsoiObj())
-        
+
         CHK(c_fsoi_ng.fsoi_ng_new(ctypes.byref(self.fsoi),
                                   model_path,
                                   scale,
@@ -146,15 +146,15 @@ class Simulation:
                                   yres,
                                   "fb"))
 
-                              
+
     def __del__(self):
         if hasattr(self,'fsoi'):
             CHK(c_fsoi_ng.fsoi_ng_delete(self.fsoi))
             del self.fsoi
-        
+
     def get_flyview(self,pos_vec3,ori_quat):
         """returns color image according to position and orientation"""
-        
+
         CHK(c_fsoi_ng.fsoi_ng_set_pos_ori(self.fsoi,
                                           pos_vec3.x,
                                           pos_vec3.y,
@@ -187,12 +187,13 @@ class Simulation:
         CHK(c_fsoi_ng.fsoi_ng_set_eyemap_geometry(self.fsoi,num,
                                                   face_xys.ctypes.data,len(face_xs),
                                                   face_fans.ctypes.data,len(face_fans)))
-        
+
     def set_eyemap_projection(self, num, x1, x2, y1, y2 ):
         CHK(c_fsoi_ng.fsoi_ng_set_eyemap_projection(self.fsoi,num,x1, x2, y1, y2 ))
 
     def set_eyemap_face_colors(self, num, RGBA_array ):
         assert RGBA_array.shape[1] == 4
+        assert RGBA_array.dtype == numpy.float32
         data = numpy.ravel(RGBA_array)
         CHK(c_fsoi_ng.fsoi_ng_set_eyemap_face_colors(self.fsoi,num,data.ctypes.data,len(RGBA_array)))
 
@@ -200,10 +201,10 @@ class Simulation:
 ##                     my_xres, my_yres, my_xang, my_yang,
 ##                     near, far):
 ##        """returns my_xres x my_yres color image"""
-        
+
 ##        dims = (my_yres,my_xres,3)
 ##        im = numpy.empty(dims,dtype=numpy.uint8)
-        
+
 ##        pos_x, pos_y, pos_z = pos_vec3.x, pos_vec3.y, pos_vec3.z
 ##        ori_x, ori_y, ori_z, ori_w = ori_quat.x, ori_quat.y, ori_quat.z, ori_quat.w
 
