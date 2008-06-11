@@ -481,7 +481,7 @@ if __name__ == '__main__':
 #    SAVE INFO (from save_sparse_weights.py)
 ########################################################
 
-    receptor_dirs, tris = make_receptor_dirs(n_subdivides=1) # n_subidivisions
+    receptor_dirs, tris = make_receptor_dirs(n_subdivides=3) # n_subidivisions
     receptors_by_phi = sort_receptors_by_phi(receptor_dirs,nbins = 32)
     edges = find_edges( tris )
     verts = receptor_dirs
