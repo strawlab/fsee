@@ -21,7 +21,9 @@ from fsee.eye_geometry.precompute_synthetic_optics import find_edges, \
 import sys, os
 
 # These data are the coordinates of the ommatidial axes as
-# hand-clicked on the Heisenberg/Buchner figure.
+# hand-clicked on the Heisenberg/Buchner figure. See the
+# trace_buchner_1971.py script for the GUI that was used to create
+# these data.
 x= array([  2.16797119e+00,   2.18880130e+00,   2.20731694e+00,
          2.18880130e+00,   2.22583258e+00,   2.20963140e+00,
          2.26749279e+00,   1.96800808e+00,   1.97118504e+00,
