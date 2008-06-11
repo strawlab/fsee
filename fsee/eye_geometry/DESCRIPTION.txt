@@ -1,0 +1,19 @@
+Front +x, +y is left, +z is up.
+
+The values in the precomputed optics file are:
+
+* receptor_dirs - a list of Cartesian coordinates of the unit vectors
+  describing the direction of each ommatidium. (N vectors, where N is
+  the number of ommatidia.)
+
+* edges - a list of tuples describing the ommatidia contributing to
+  each EMD. (M tuples, where M is the number of EMDs and is
+  approximately equal to 3*N.)
+
+So, to access these, do::
+
+ import fsee.eye_geometry.switcher
+ precomputed = fsee.eye_geometry.switcher.get_module_for_optics(optics='buchner71')
+
+Then, precomputed.receptor_dirs and precomputed.edges are the
+variables listed above.
