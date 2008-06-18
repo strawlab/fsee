@@ -25,6 +25,7 @@ extern "C" {
 #include <osg/Billboard>
 #include <osg/Material>
 #include <osg/AnimationPath>
+#include <osg/CullSettings>
 
 #include <osgGA/TrackballManipulator>
 
@@ -263,6 +264,10 @@ osg::Node* createPreRenderSubGraph(osg::Node* subgraph, unsigned tex_width, unsi
 
         znear *= 0.9f;
         zfar *= 1.1f;
+
+	// default seems to be COMPUTE_NEAR_FAR_USING_BOUNDING_VOLUMES, which doesn't seem to always work
+	camera->setComputeNearFarMode(osg::CullSettings::COMPUTE_NEAR_FAR_USING_PRIMITIVES);
+	camera->setNearFarRatio(0.00001f);
 
         // set up projection.
         camera->setProjectionMatrixAsFrustum(-proj_right,proj_right,-proj_top,proj_top,znear,zfar);
