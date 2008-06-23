@@ -12,35 +12,36 @@ import pylab
 import scipy
 import scipy.io
 
-if 1:
-    # load some data from Alice's arena
-    data=scipy.io.loadmat('alice_data')
-    d2=data['DATA']
-
-    x=d2[0,:]
-
-    y=d2[1,:]
-
-    D2R = math.pi/180.0
-    theta=d2[2,:]*D2R
-
-    xoffset = 753
-    yoffset = 597
-
-    radius_pix = 753-188 # pixels
-
-    # 10 inch = 25.4 cm = 254 mm = diameter = 2*radius
-    pix_per_mm = 2.0*radius_pix/254.0
-
-    mm_per_pixel = 1.0/pix_per_mm
-
-    xgain = mm_per_pixel
-    ygain = mm_per_pixel
-
-    x_mm=(x-xoffset)*xgain
-    y_mm=(y-yoffset)*ygain
-
 def main():
+
+    if 1:
+        # load some data from Alice's arena
+        data=scipy.io.loadmat('alice_data')
+        d2=data['DATA']
+
+        x=d2[0,:]
+
+        y=d2[1,:]
+
+        D2R = math.pi/180.0
+        theta=d2[2,:]*D2R
+
+        xoffset = 753
+        yoffset = 597
+
+        radius_pix = 753-188 # pixels
+
+        # 10 inch = 25.4 cm = 254 mm = diameter = 2*radius
+        pix_per_mm = 2.0*radius_pix/254.0
+
+        mm_per_pixel = 1.0/pix_per_mm
+
+        xgain = mm_per_pixel
+        ygain = mm_per_pixel
+
+        x_mm=(x-xoffset)*xgain
+        y_mm=(y-yoffset)*ygain
+
     hz = 200.0
     tau_emd = 0.1
 
@@ -75,6 +76,15 @@ def main():
             fps = count/dur
             print '%d frames rendered in %.1f seconds (%.1f fps)'%(count,dur,fps)
 
-if 1:
-    # don't profile
-    main()
+if __name__=='__main__':
+    if int(os.environ.get('PROFILE','0')):
+        import cProfile
+        import lsprofcalltree
+        p = cProfile.Profile()
+        p.run('main()')
+        k = lsprofcalltree.KCacheGrind(p)
+        data = open(os.path.expanduser('~/fsee_simple_benchmark.kgrind'), 'w+')
+        k.output(data)
+        data.close()
+    else:
+        main()
