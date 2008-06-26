@@ -658,12 +658,12 @@ FsoiErr fsoi_ng_render_frame_copy(FsoiObj* theobj,
 				  int height,
 				  int num_bytes_per_pixel) {
   unsigned char* orig_data_ptr;
-  FsoiErr e;
+  FsoiErr err;
   int s,t,src_bpp;
 
-  e = fsoi_ng_render_frame(theobj, &orig_data_ptr, &s, &t, &src_bpp);
-  if (e != FsoiNoErr) {
-    return e;
+  err = fsoi_ng_render_frame(theobj, &orig_data_ptr, &s, &t, &src_bpp);
+  if (err != FsoiNoErr) {
+    return err;
   }
 
   if (!(s==width && t==height && src_bpp==num_bytes_per_pixel)){
