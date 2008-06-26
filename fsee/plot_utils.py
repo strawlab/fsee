@@ -407,6 +407,7 @@ def touchup_axes(wrapped_basemap_instance,ax):
 
 def plot_receptor_and_emd_fig( R=None,G=None,B=None,
                                emds=None, scale=1.0, title = None,
+                               subplot_titles_enabled=True,
                                save_fname=None,
                                dpi=None, figsize=None,
                                overlay_receptor_circles=False,
@@ -457,7 +458,8 @@ def plot_receptor_and_emd_fig( R=None,G=None,B=None,
     def do_receptor_plot(ax,biw,eye_name,title):
 
         plot_faces( biw, ax, R,G,B)
-        pylab.title(title,fontsize=10)
+        if title is not None:
+            pylab.title(title,fontsize=10)
         ax.set_aspect('equal') # XXX newly added -- test
         ax.set_xticks([])
         ax.set_yticks([])
@@ -474,7 +476,8 @@ def plot_receptor_and_emd_fig( R=None,G=None,B=None,
         plot_emd_outputs(biw, ax, emds, scale=scale,
                          threshold_magnitude=emd_threshold_magnitude,
                          linewidths=[emd_linewidth] )
-        pylab.title(title,fontsize=10)
+        if title is not None:
+            pylab.title(title,fontsize=10)
         draw_extra_lines(ax,biw)
         ax.set_aspect('equal') # XXX newly added -- test
         xlim = ax.get_xlim()
@@ -505,10 +508,8 @@ def plot_receptor_and_emd_fig( R=None,G=None,B=None,
 
     if plot_emds and plot_receptors:
         fig = pylab.figure(figsize=figsize)
-        n_rows = 2
     else:
         fig = pylab.figure(figsize=figsize)
-        n_rows = 1
 
     if optics == 'synthetic':
         zoom_factor = 1.0
@@ -522,8 +523,11 @@ def plot_receptor_and_emd_fig( R=None,G=None,B=None,
 
         biwA = biw_front
         biwB = biw_back
-        titleA = 'front'
-        titleB = 'back'
+        if subplot_titles_enabled:
+            titleA = 'front'
+            titleB = 'back'
+        else:
+            titleA = titleB = None
         slicer_name_A = None
         slicer_name_B = None
         flipX = False
@@ -552,8 +556,11 @@ def plot_receptor_and_emd_fig( R=None,G=None,B=None,
 
         biwA = biw_left
         biwB = biw_right
-        titleA = 'left eye'
-        titleB = 'right eye'
+        if subplot_titles_enabled:
+            titleA = 'left eye'
+            titleB = 'right eye'
+        else:
+            titleA = titleB = None
         slicer_name_A = 'left'
         slicer_name_B = 'right'
         flipX = True
