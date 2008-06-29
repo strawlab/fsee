@@ -14,6 +14,10 @@ int main( int argc, const char** argv ) {
   unsigned char* image_data;
   int image_width, image_height, bpp;
   double x,y,z,qw,qx,qy,qz;
+  float verts[12];
+  unsigned char len;
+  int count=0;
+  float colors[4];
   
   CHK(fsoi_ng_init());
 
@@ -28,7 +32,6 @@ int main( int argc, const char** argv ) {
   CHK(fsoi_ng_run(fsoi_obj));
 #else
 
-  float verts[12];
   verts[0] = 0.0; verts[1] = 0.0; // x,y
   verts[2] = -5;  verts[3] = -5;
   verts[4] = -5;  verts[5] =  5;
@@ -36,7 +39,7 @@ int main( int argc, const char** argv ) {
   verts[8] = 5;   verts[9] = -5;
   verts[10]= -5;  verts[11]= -5;
   
-  unsigned char len=6;
+  len=6;
   CHK(fsoi_ng_set_eyemap_geometry( fsoi_obj, 0, &verts[0], 12, &len, 1 ));
   CHK(fsoi_ng_set_eyemap_geometry( fsoi_obj, 1, NULL, 0, NULL, 0 ));
   CHK(fsoi_ng_set_eyemap_projection( fsoi_obj, 0, -6*1.5,6*1.5, -6,6 ));
@@ -50,8 +53,7 @@ int main( int argc, const char** argv ) {
   qy = 0.0;
   qz = 0.0;
   
-  int count=0;
-  float colors[4];
+  count=0; 
   while(count <300) {
     count++;
     CHK(fsoi_ng_set_pos_ori(fsoi_obj,x,y,z,qw,qx,qy,qz));

@@ -1,11 +1,15 @@
 # emacs, this is -*-Python-*- mode
 import sys, os
 
-debug = 1#ARGUMENTS.get('debug', 0)
+debug = ARGUMENTS.get('debug', 0)
 
 env = Environment()#ENV = os.environ)
+
 if int(debug):
-    env.Append(CCFLAGS = '-g')
+    if sys.platform.startswith('win'):
+        raise NotImplementedError('')
+    else:
+        env.Append(CCFLAGS = '-g')
 
 def add_osg_opts(kws):
     if sys.platform.startswith('darwin'):
@@ -13,7 +17,12 @@ def add_osg_opts(kws):
         kws.setdefault('CPPDEFINES',{}).update({'__USE_OSX_CGL_IMPLEMENTATION__':None})
         #kws.setdefault('CPPDEFINES',{}).update({'__USE_OSX_AGL_IMPLEMENTATION__':None})
     else:
-        kws.setdefault('LIBS',[]).extend(['osgDB', 'osgUtil', 'osg', 'osgViewer',])
+        if sys.platform.startswith('win'):
+            osg_root = os.environ['OSG_ROOT']
+            kws.setdefault('CPPPATH',[]).append( os.path.join(osg_root,'include'))
+            kws.setdefault('CPPDEFINES',{}).update({'WIN32':None})
+            kws.setdefault('LIBPATH',[]).append( os.path.join(osg_root,'lib'))        
+        kws.setdefault('LIBS',[]).extend(['osgDB', 'osgUtil', 'osg', 'osgViewer','osgGA'])
     return kws
 
 if 1:
@@ -22,7 +31,9 @@ if 1:
         sodict = {}
         add_osg_opts(sodict)
 
-        sodict['target'] = '../../fsee/fsoi_ng'
+        shlib_target = os.path.join('..','..','fsee','fsoi_ng')
+        #shlib_target = 'fsoi_ng'
+        sodict['target'] = shlib_target
         sodict['source'] = ['fsoi_ng.cpp','EyeMap.cpp']
 
         if sys.platform.startswith('win'):
@@ -38,11 +49,13 @@ if 1:
 
         lib_fsoi_ng = env.SharedLibrary(**sodict)
 
-        env.Program(target='fsoi_ng_test',
-                    source=['fsoi_ng_test.c'],
-                    #LIBS=['fsoi_ng'],
-                    LIBS=[lib_fsoi_ng],
-                    )
+        if 0:
+            env.Program(target='fsoi_ng_test',
+                        source=['fsoi_ng_test.c'],
+                        #LIBS=['fsoi_ng'],
+                        LIBS=[lib_fsoi_ng],
+                        #LIBPATH=[shlib_target],
+                        )
     else:
         prog_kws = {}
         add_osg_opts(prog_kws)

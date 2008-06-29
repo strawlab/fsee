@@ -256,21 +256,21 @@ osg::Node* createPreRenderSubGraph(osg::Node* subgraph, unsigned tex_width, unsi
         }
 
         float znear = 1.0f*bs.radius();
-        float zfar  = 3.0f*bs.radius();
+        float zfarclip  = 3.0f*bs.radius();
 
         // 2:1 aspect ratio as per flag geomtry below.
         float proj_top   = 0.25f*znear;
         float proj_right = 0.5f*znear;
 
         znear *= 0.9f;
-        zfar *= 1.1f;
+        zfarclip *= 1.1f;
 
 	// default seems to be COMPUTE_NEAR_FAR_USING_BOUNDING_VOLUMES, which doesn't seem to always work
 	camera->setComputeNearFarMode(osg::CullSettings::COMPUTE_NEAR_FAR_USING_PRIMITIVES);
 	camera->setNearFarRatio(0.00001f);
 
         // set up projection.
-        camera->setProjectionMatrixAsFrustum(-proj_right,proj_right,-proj_top,proj_top,znear,zfar);
+        camera->setProjectionMatrixAsFrustum(-proj_right,proj_right,-proj_top,proj_top,znear,zfarclip);
 
         // set view
         camera->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
@@ -335,8 +335,8 @@ public:
 	    const char *skybox_basename,
 	    double im_xang,
 	    double im_yang,
-	    double near,
-	    double far,
+	    double nearclip,
+	    double farclip,
 	    unsigned tex_width=64,
 	    unsigned tex_height=64,
 	    //osg::Camera::RenderTargetImplementation renderImplementation = osg::Camera::FRAME_BUFFER_OBJECT,
@@ -407,7 +407,9 @@ public:
 
 #ifdef SEIZE_CAMERA
     // set camera properties (re-setting what was done in createPreRenderSubGraph)
-    prerender_camera->setProjectionMatrixAsPerspective( im_yang, im_xang/im_yang, near, far);
+    
+    prerender_camera->setProjectionMatrixAsPerspective( im_yang, (im_xang/im_yang), nearclip, farclip);
+    
 #endif
 
     // add model to the viewer.
@@ -566,9 +568,9 @@ FsoiErr fsoi_ng_init() {
 
 FsoiErr fsoi_ng_new(FsoiObj** theobjptr, const char* filename, double scale,
 		    const char* skybox_basename,
-		    double im_xang, double im_yang, double near, double far,
+		    double im_xang, double im_yang, double nearclip, double farclip,
 		    int im_width, int im_height, const char* render_implementation) {
-  DPRINTF("new called (scale %f, near %f, far %f, render %s)\n",scale, near, far, render_implementation);
+  DPRINTF("new called (scale %f, nearclip %f, farclip %f, render %s)\n",scale, nearclip, farclip, render_implementation);
 
   osg::Camera::RenderTargetImplementation renderImplementation;
 
@@ -594,8 +596,8 @@ FsoiErr fsoi_ng_new(FsoiObj** theobjptr, const char* filename, double scale,
 					 skybox_basename,
 					 im_xang,
 					 im_yang,
-					 near,
-					 far,
+					 nearclip,
+					 farclip,
 					 im_width,
 					 im_height);
   theobj->the_cpp_obj = (void*)(the_cpp_obj);
