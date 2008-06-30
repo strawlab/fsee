@@ -1,6 +1,6 @@
 # Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
 
-import os, glob, sys, time
+import os, glob, sys, time, shutil
 from setuptools import setup, find_packages
 from setuptools.dist import Distribution
 
@@ -65,9 +65,12 @@ elif sys.platform.startswith('darwin'):
     prefix = 'libfsoi_ng'
     extension = '.dylib'
 
-libfile = os.path.join('fsee',prefix+extension)
+libfile = os.path.join('src','fsoi',prefix+extension)
 if not os.path.exists(libfile):
     raise RuntimeError('libfsoi_ng (or fsoi_ng.dll) does not exist -- aborting -- run scons in src/fsoi')
+
+# copy .so or .dll from build directory into target directory
+shutil.copy2(libfile,os.path.join('fsee',prefix+extension))
 
 fsee_package_data.append( prefix+extension)
 

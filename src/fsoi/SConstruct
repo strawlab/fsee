@@ -21,7 +21,7 @@ def add_osg_opts(kws):
             osg_root = os.environ['OSG_ROOT']
             kws.setdefault('CPPPATH',[]).append( os.path.join(osg_root,'include'))
             kws.setdefault('CPPDEFINES',{}).update({'WIN32':None})
-            kws.setdefault('LIBPATH',[]).append( os.path.join(osg_root,'lib'))        
+            kws.setdefault('LIBPATH',[]).append( os.path.join(osg_root,'lib'))
         kws.setdefault('LIBS',[]).extend(['osgDB', 'osgUtil', 'osg', 'osgViewer','osgGA'])
     return kws
 
@@ -31,8 +31,7 @@ if 1:
         sodict = {}
         add_osg_opts(sodict)
 
-        shlib_target = os.path.join('..','..','fsee','fsoi_ng')
-        #shlib_target = 'fsoi_ng'
+        shlib_target = 'fsoi_ng'
         sodict['target'] = shlib_target
         sodict['source'] = ['fsoi_ng.cpp','EyeMap.cpp']
 
@@ -49,13 +48,17 @@ if 1:
 
         lib_fsoi_ng = env.SharedLibrary(**sodict)
 
-        if 0:
+        if 1:
+            kws = {}
+            if sys.platform.startswith('win'):
+                kws.setdefault('CPPDEFINES',{}).update({'FSOI_NG_DLL':None,
+                                                       })
+
             env.Program(target='fsoi_ng_test',
                         source=['fsoi_ng_test.c'],
-                        #LIBS=['fsoi_ng'],
                         LIBS=[lib_fsoi_ng],
                         #LIBPATH=[shlib_target],
-                        )
+                        **kws)
     else:
         prog_kws = {}
         add_osg_opts(prog_kws)
