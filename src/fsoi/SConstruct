@@ -39,6 +39,7 @@ if 1:
             sodict.setdefault('CPPDEFINES',{}).update({'FSOI_NG_DLL':None,
                                                        'FSOI_NG_EXPORTS':None,
                                                        })
+            sodict.setdefault('CXXFLAGS',[]).append('/EHsc')
 
         USE_SKYBOX = True
 
