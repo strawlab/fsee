@@ -1,8 +1,11 @@
 # Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
 try:
     from mpl_toolkits.basemap import Basemap # basemap > 0.9.9.1
-except ImportError:
-    from matplotlib.toolkits.basemap import Basemap
+except ImportError, err1:
+    try:
+        from matplotlib.toolkits.basemap import Basemap
+    except ImportError, err2:
+        raise err1
 
 from matplotlib.collections import LineCollection
 import pylab
