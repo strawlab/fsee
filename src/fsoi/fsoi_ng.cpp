@@ -1,3 +1,8 @@
+/*
+Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
+Author: Andrew D. Straw
+*/
+
 extern "C" {
 #include "fsoi_ng.h"
 }
@@ -345,20 +350,25 @@ public:
 	    bool useHDR = false
 	    ) {
     DPRINTF("constructor called\n");
+    bool useImage = true;
+    osg::Node* loadedModel = NULL;
+    osg::MatrixTransform* loadedModelTransform = new osg::MatrixTransform;
 
     std::vector<std::string> filenames = std::vector<std::string>();
-    filenames.push_back( std::string(filename) );
+    if (filename==NULL) {
+      fprintf(stderr,"no filename specified in MyFsoiObj constructor (%s,%d)\n",__FILE__,__LINE__);
+      loadedModel = new osg::Node();
+    } else {
+      filenames.push_back( std::string(filename) );
 
-    bool useImage = true;
-
-    osg::Node* loadedModel = osgDB::readNodeFiles(filenames);
-    if (!loadedModel)
-    {
-      DPRINTF("Aborting: could not load files\n");
-      exit(2);
+      loadedModel = osgDB::readNodeFiles(filenames);
+      if (!loadedModel)
+	{
+	  DPRINTF("Aborting: could not load files\n");
+	  exit(2);
+	}
+      loadedModelTransform->addChild(loadedModel);
     }
-    osg::MatrixTransform* loadedModelTransform = new osg::MatrixTransform;
-    loadedModelTransform->addChild(loadedModel);
 
 #define SEIZE_CAMERA
 #ifdef SEIZE_CAMERA
@@ -380,7 +390,7 @@ public:
     prerender_camera = new osg::Camera;
 
 
-  osg::Group* model_and_sky = new osg::Group();
+    model_and_sky = new osg::Group();
 #ifdef USE_SKYBOX
   if (skybox_basename) {
     osg::ref_ptr<osg::ClearNode> skybox_node = new osg::ClearNode();
@@ -407,9 +417,9 @@ public:
 
 #ifdef SEIZE_CAMERA
     // set camera properties (re-setting what was done in createPreRenderSubGraph)
-    
+
     prerender_camera->setProjectionMatrixAsPerspective( im_yang, (im_xang/im_yang), nearclip, farclip);
-    
+
 #endif
 
     // add model to the viewer.
@@ -544,6 +554,10 @@ public:
     prerender_camera->setViewMatrix(m);
   }
 
+  void addChild( osg::Node *child) {
+    model_and_sky->addChild(child);
+  }
+
   inline void get_width_height(int* width,int* height) {
     *width = prerender_image->s();
     *height = prerender_image->t();
@@ -557,12 +571,114 @@ private:
   osg::ref_ptr<osg::Camera> prerender_camera;
   osg::ref_ptr<EyeMap> eye_map_geode[2];
   osg::ref_ptr<osg::Projection> _eyemap_projection[2];
+  osg::Group* model_and_sky;
 };
 
 extern "C" {
 
 FsoiErr fsoi_ng_init() {
   DPRINTF("initializing\n");
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_MatrixTransform_new( osg::MatrixTransform** xform_handle) {
+  if ((*xform_handle) != NULL) {
+    DPRINTF("passed already-initialized memory location!\n");
+    return FsoiAlreadyInitializedMemory;
+  }
+
+#define use_new_delete
+#ifdef use_new_delete
+  *xform_handle = new osg::MatrixTransform();
+#else
+  *xform_handle = <osg::MatrixTransform*>malloc(sizeof(osg::MatrixTransform));
+  DPRINTF("transform allocated\n");
+
+  if (*xform_handle == NULL) {
+    return FsoiMemoryError;
+  }
+
+  *xform_handle = osg::MatrixTransform(); // initialize memory
+#endif
+
+  osg::MatrixTransform *xform_ptr = *xform_handle;
+  DPRINTF("allocated xform at %p\n",xform_ptr);
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_MatrixTransform_delete(osg::MatrixTransform** xform_handle) {
+  osg::MatrixTransform *xform_ptr = *xform_handle;
+  DPRINTF("deleting xform at %p\n",xform_ptr);
+
+#ifdef use_new_delete
+  //delete xform_ptr;
+  //DPRINTF("DELETED ptr\n");
+  DPRINTF("MEMORY LEAK!\n");
+  fprintf(stderr,"memory leak in %s, line %d\n",__FILE__,__LINE__);
+#else
+  DPRINTF("MEMORY LEAK!\n");
+#endif
+  *xform_handle = NULL;
+
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_Node_new( osg::Node** node_handle, char* fname) {
+  if ((*node_handle) != NULL) {
+    DPRINTF("passed already-initialized memory location!\n");
+    return FsoiAlreadyInitializedMemory;
+  }
+  *node_handle = osgDB::readNodeFile(fname);
+  osg::Node *node_ptr = *node_handle;
+  if (node_ptr==NULL) {
+    return FsoiReadNodeFileError;
+  }
+  DPRINTF("allocated node at %p\n",node_ptr);
+
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_Node_delete(osg::Node** node_handle) {
+  osg::Node *node_ptr = *node_handle;
+  DPRINTF("deleting node at %p\n",node_ptr);
+
+#ifdef use_new_delete
+  //delete node_ptr;
+  //DPRINTF("DELETED ptr\n");
+  DPRINTF("MEMORY LEAK!\n");
+  fprintf(stderr,"memory leak for node in %s, line %d\n",__FILE__,__LINE__);
+#else
+  DPRINTF("MEMORY LEAK!\n");
+#endif
+  *node_handle = NULL;
+
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_MatrixTransform_setMatrix(osg::MatrixTransform** xform_handle,
+					  double a00,double a01, double a02, double a03,
+					  double a10,double a11, double a12, double a13,
+					  double a20,double a21, double a22, double a23,
+					  double a30,double a31, double a32, double a33) {
+  osg::MatrixTransform *xform_ptr = *xform_handle;
+  xform_ptr->setMatrix(osg::Matrixd(a00,a01,a02,a03,
+				    a10,a11,a12,a13,
+				    a20,a21,a22,a23,
+				    a30,a31,a32,a33));
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_MatrixTransform_add_Node(osg::MatrixTransform** xform_handle,osg::Node** node_handle) {
+  osg::MatrixTransform *xform_ptr = *xform_handle;
+  osg::Node *node_ptr = *node_handle;
+  xform_ptr->addChild(node_ptr);
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_fsoi_obj_add_MatrixTransform(FsoiObj* theobj, osg::MatrixTransform** xform_handle) {
+  MyFsoiObj* mfo = (MyFsoiObj*)theobj->the_cpp_obj;
+  osg::MatrixTransform* xform_ptr= *xform_handle;
+  mfo->addChild(xform_ptr);
   return FsoiNoErr;
 }
 

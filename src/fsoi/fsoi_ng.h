@@ -1,3 +1,8 @@
+/*
+Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
+Author: Andrew D. Straw
+*/
+
 #ifndef FSOI_NG_H
 #define FSOI_NG_H
 
@@ -27,7 +32,10 @@ typedef enum FsoiErrTypes
   FsoiRenderFrameError,
   FsoiUnsupportedData,
   FsoiRequestWrongSizeErr,
-  FsoiUnknownRenderImplementeation
+  FsoiUnknownRenderImplementeation,
+  FsoiAlreadyInitializedMemory,
+  FsoiMemoryError,
+  FsoiReadNodeFileError
 }
 FsoiErrTypes;
 

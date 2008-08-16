@@ -1,6 +1,7 @@
-# Copyright (C) 2005-2007 California Institute of Technology, All rights reserved
+# Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
 # Author: Andrew D. Straw
 import numpy
+import numpy as np
 
 import fsee
 import os, sys
@@ -36,11 +37,28 @@ else:
 class FsoiObj(ctypes.Structure):
     _fields_ = [('the_cpp_obj',ctypes.c_void_p),]
 
+MatrixTransformPtrType=ctypes.POINTER(ctypes.c_int)
+NodePtrType=ctypes.POINTER(ctypes.c_int)
+
 c_fsoi_ng.fsoi_ng_init.restype = ctypes.c_int
 c_fsoi_ng.fsoi_ng_init.argtypes = []
 
 c_fsoi_ng.fsoi_ng_shutdown.restype = ctypes.c_int
 c_fsoi_ng.fsoi_ng_shutdown.argtypes = []
+
+c_fsoi_ng.fsoi_ng_MatrixTransform_new.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_MatrixTransform_new.argtypes = [ctypes.POINTER(MatrixTransformPtrType)]
+
+c_fsoi_ng.fsoi_ng_MatrixTransform_delete.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_MatrixTransform_delete.argtypes = [ctypes.POINTER(MatrixTransformPtrType)]
+
+c_fsoi_ng.fsoi_ng_Node_new.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_Node_new.argtypes = [ctypes.POINTER(NodePtrType),
+                                       ctypes.c_char_p, # filename
+                                       ]
+
+c_fsoi_ng.fsoi_ng_Node_delete.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_Node_delete.argtypes = [ctypes.POINTER(NodePtrType)]
 
 c_fsoi_ng.fsoi_ng_new.restype = ctypes.c_int
 c_fsoi_ng.fsoi_ng_new.argtypes = [ctypes.POINTER(ctypes.POINTER(FsoiObj)),
@@ -110,6 +128,23 @@ c_fsoi_ng.fsoi_ng_set_eyemap_face_colors.argtypes = [ctypes.POINTER(FsoiObj),
                                                      ctypes.c_int,
                                                      ctypes.c_void_p,
                                                      ctypes.c_int]
+
+c_fsoi_ng.fsoi_ng_fsoi_obj_add_MatrixTransform.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_fsoi_obj_add_MatrixTransform.argtypes = [ctypes.POINTER(FsoiObj),
+                                                           ctypes.POINTER(MatrixTransformPtrType)]
+
+c_fsoi_ng.fsoi_ng_MatrixTransform_add_Node.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_MatrixTransform_add_Node.argtypes = [ctypes.POINTER(MatrixTransformPtrType),
+                                                       ctypes.POINTER(NodePtrType)]
+
+c_fsoi_ng.fsoi_ng_MatrixTransform_setMatrix.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_MatrixTransform_setMatrix.argtypes = [ctypes.POINTER(MatrixTransformPtrType),
+                                                        ctypes.c_double,ctypes.c_double,ctypes.c_double,ctypes.c_double,
+                                                        ctypes.c_double,ctypes.c_double,ctypes.c_double,ctypes.c_double,
+                                                        ctypes.c_double,ctypes.c_double,ctypes.c_double,ctypes.c_double,
+                                                        ctypes.c_double,ctypes.c_double,ctypes.c_double,ctypes.c_double,
+                                                        ]
+
 ############################
 
 class FSOIError(Exception):
@@ -120,6 +155,42 @@ def CHK(m):
         raise FSOIError('error: %d'%(m,))
 
 CHK(c_fsoi_ng.fsoi_ng_init())
+
+class MatrixTransform:
+    def __init__(self):
+        self._transform = MatrixTransformPtrType()
+        CHK(c_fsoi_ng.fsoi_ng_MatrixTransform_new(ctypes.byref(self._transform)))
+    def __del__(self):
+        CHK(c_fsoi_ng.fsoi_ng_MatrixTransform_delete(ctypes.byref(self._transform)))
+    def _getref(self):
+        return ctypes.byref(self._transform)
+    def _add_Node(self, node ):
+        assert isinstance(node,Node)
+        # calls addChild method on self._transform
+        CHK(c_fsoi_ng.fsoi_ng_MatrixTransform_add_Node(ctypes.byref(self._transform),
+                                                       node._getref()))
+    def setMatrix(self, arr):
+        arr = np.asarray(arr)
+        if arr.shape != (4,4):
+            raise ValueError('expected 4x4 array')
+
+        # calls addChild method on self._transform
+        CHK(c_fsoi_ng.fsoi_ng_MatrixTransform_setMatrix(ctypes.byref(self._transform),
+                                                        arr[0,0],arr[0,1],arr[0,2],arr[0,3],
+                                                        arr[1,0],arr[1,1],arr[1,2],arr[1,3],
+                                                        arr[2,0],arr[2,1],arr[2,2],arr[2,3],
+                                                        arr[3,0],arr[3,1],arr[3,2],arr[3,3],
+                                                        ))
+
+class Node:
+    def __init__(self,filename):
+        self._node = NodePtrType()
+        CHK(c_fsoi_ng.fsoi_ng_Node_new(ctypes.byref(self._node),
+                                       filename))
+    def __del__(self):
+        CHK(c_fsoi_ng.fsoi_ng_Node_delete(ctypes.byref(self._node)))
+    def _getref(self):
+        return ctypes.byref(self._node)
 
 class Simulation:
     def __init__(self,
@@ -145,7 +216,7 @@ class Simulation:
                                   xres,
                                   yres,
                                   "fb"))
-
+        self._flytransform = None
 
     def __del__(self):
         if hasattr(self,'fsoi'):
@@ -214,3 +285,28 @@ class Simulation:
 ##            my_xres, my_yres, my_xang, my_yang,
 ##            im,near,far)
 ##        return im
+
+    def _add_MatrixTransform(self, matrixtransform ):
+        assert isinstance(matrixtransform,MatrixTransform)
+        # calls addChild method on root
+        CHK(c_fsoi_ng.fsoi_ng_fsoi_obj_add_MatrixTransform(self.fsoi,
+                                                           matrixtransform._getref()))
+
+    def _ensure_flybody(self):
+        if self._flytransform is not None:
+            return
+        self._flytransform = MatrixTransform()
+        self._add_MatrixTransform( self._flytransform )
+
+        fname=os.path.join(fsee.data_dir,'models/fly/body.osg')
+        if not os.path.exists(fname):
+            raise ValueError('fname does not exist!')
+        self._flynode = Node(fname)
+
+    def insert_flybody(self):
+        self._ensure_flybody()
+        self._flytransform._add_Node( self._flynode )
+
+    def set_flytransform(self,M):
+        self._ensure_flybody()
+        self._flytransform.setMatrix(M)
