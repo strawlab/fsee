@@ -160,6 +160,7 @@ class MatrixTransform:
     def __init__(self):
         self._transform = MatrixTransformPtrType()
         CHK(c_fsoi_ng.fsoi_ng_MatrixTransform_new(ctypes.byref(self._transform)))
+        self._keep_refs = []
     def __del__(self):
         CHK(c_fsoi_ng.fsoi_ng_MatrixTransform_delete(ctypes.byref(self._transform)))
     def _getref(self):
@@ -169,6 +170,8 @@ class MatrixTransform:
         # calls addChild method on self._transform
         CHK(c_fsoi_ng.fsoi_ng_MatrixTransform_add_Node(ctypes.byref(self._transform),
                                                        node._getref()))
+        self._keep_refs.append( node ) # make sure it isn't deallocated
+
     def setMatrix(self, arr):
         arr = np.asarray(arr)
         if arr.shape != (4,4):
@@ -216,7 +219,7 @@ class Simulation:
                                   xres,
                                   yres,
                                   "fb"))
-        self._flytransform = None
+        self._matrix_transforms = []
 
     def __del__(self):
         if hasattr(self,'fsoi'):
@@ -293,20 +296,26 @@ class Simulation:
                                                            matrixtransform._getref()))
 
     def _ensure_flybody(self):
-        if self._flytransform is not None:
+        if hasattr(self,'_flytransform'):
             return
-        self._flytransform = MatrixTransform()
-        self._add_MatrixTransform( self._flytransform )
-
         fname=os.path.join(fsee.data_dir,'models/fly/body.osg')
-        if not os.path.exists(fname):
-            raise ValueError('fname does not exist!')
-        self._flynode = Node(fname)
+        self._flytransform = self.add_node_as_matrixtransform(fname)
 
     def insert_flybody(self):
         self._ensure_flybody()
-        self._flytransform._add_Node( self._flynode )
 
     def set_flytransform(self,M):
         self._ensure_flybody()
         self._flytransform.setMatrix(M)
+
+    def add_node_as_matrixtransform(self,filename):
+        transform = MatrixTransform()
+        self._add_MatrixTransform( transform )
+        self._matrix_transforms.append( transform )
+
+        if not os.path.exists(filename):
+            raise ValueError('file does not exist at %s!'%filename)
+        node=Node(filename)
+        transform._add_Node( node )
+
+        return transform
