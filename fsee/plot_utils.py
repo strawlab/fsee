@@ -14,7 +14,7 @@ import math
 import cgkit.cgtypes as cgtypes # cgkit 2
 import numpy
 
-import fsee.eye_geometry.util
+import fsee.eye_geometry.emd_util as emd_util
 import fsee.eye_geometry.switcher
 
 # XXX I could refactor this to make basemap required only in a
@@ -325,10 +325,10 @@ def plot_emd_outputs( wrapped_basemap_instance, ax, signal, scale=1.0,
                       threshold_magnitude=0.0, **kw):
     biw = wrapped_basemap_instance
     edges = biw.get_edges(name=biw.eye_name)
-    emd_orig_dirs = fsee.eye_geometry.util.get_emd_center_directions(
+    emd_orig_dirs = emd_util.get_emd_center_directions(
         edges, biw.get_receptor_dirs() )
     mysignal = signal[biw.edge_slicer[biw.eye_name]]
-    angular_vels = fsee.eye_geometry.util.project_emds_to_angular_velocity(
+    angular_vels = emd_util.project_emds_to_angular_velocity(
         mysignal,biw.get_receptor_dirs(),edges)
     plot_angular_vels( wrapped_basemap_instance, ax, emd_orig_dirs, angular_vels,
                        edges,

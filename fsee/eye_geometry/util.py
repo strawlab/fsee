@@ -57,22 +57,75 @@ def get_emd_center_directions( edges, receptor_dirs ):
         emd_center_dirs.append( emd_pos )
     return emd_center_dirs
 
+def find_edges( tris ):
+    def sort_pair( ab ):
+        if ab[0] <= ab[1]:
+            return ab
+        else:
+            return (ab[1], ab[0])
+    def is_in_sorted_pairs( edge, edges ):
+        e0 = edge[0]
+        e1 = edge[1]
+        # we know edge[0] is less than edge[1], and pairs in edges are similarly sorted
+        for etest in edges:
+            if e0 == etest[0]:
+                if e1 == etest[1]:
+                    return True
+        return False
 
-def get_mean_interommatidial_distance( receptor_dirs, triangles ):
-    """returns values in radians"""
-    # this is not efficient...
-    mean_thetas = []
-    for iv,v in enumerate(receptor_dirs):
-        neighbors = sets.Set()
-        for tri in triangles:
-            if iv in tri:
-                for it in tri:
-                    neighbors.add(it)
-        neighbors = list(neighbors)
-        neighbors.remove( iv )
-        neighbor_dirs = [ receptor_dirs[int(n)] for n in neighbors ]
-        cos_theta_neighbors = [numpy.dot(n,v) for n in neighbor_dirs]
-        theta_neighbors = [numpy.arccos( c ) for c in cos_theta_neighbors]
-        mean_theta = numpy.mean(theta_neighbors)
-        mean_thetas.append(mean_theta)
-    return mean_thetas
+    edges = []
+    for tri in tris:
+        tri_edges = [sort_pair((tri[0], tri[1])),
+                     sort_pair((tri[1], tri[2])),
+                     sort_pair((tri[2], tri[0]))]
+        for tri_edge in tri_edges:
+            if not is_in_sorted_pairs(tri_edge, edges):
+                edges.append( tri_edge )
+    return edges
+
+def pseudo_voronoi(verts,tris_orig):
+    if hasattr(tris_orig,'shape'):
+        # convert from numpy to list of tuples for comparison
+        tris = [ tuple(tri) for tri in tris_orig ]
+    else:
+        tris = tris_orig
+    faces=[]
+    for vert_idx,vert in enumerate(verts):
+        # find my triangles
+        my_tris = []
+        for tri in tris:
+            if vert_idx in tri:
+                my_tris.append( tri )
+
+        # now walk around neighboring triangles
+        ordered_facet = []
+        ordered_tris = []
+        # start walk at first triangle in list
+        prev_tri = my_tris[0]
+        ordered_tris.append( prev_tri )
+        prev_vert = my_tris[0][0]
+        if prev_vert == vert_idx:
+            prev_vert = my_tris[0][1]
+        ordered_facet.append( prev_vert )
+        tri_idx = 1
+        while len(ordered_facet) < len( my_tris ):
+            tri = my_tris[tri_idx]
+            tri_idx = (tri_idx+1)%len(my_tris) # wrap to beginning
+            if tri == prev_tri:
+                continue
+            if prev_vert not in tri: # must walk
+                continue
+
+            for nvidx in tri:
+                if nvidx == vert_idx or nvidx == prev_vert:
+                    continue
+                ordered_facet.append( nvidx )
+                prev_vert = nvidx
+                prev_tri = tri
+                ordered_tris.append( prev_tri )
+                break
+
+        #vverts = [ (vert + verts[ofvi])*0.5 for ofvi in ordered_facet ]
+        vverts = [ (verts[t[0]]+verts[t[1]]+verts[t[2]])*(1.0/3.0) for t in ordered_tris ]
+        faces.append( vverts )
+    return faces
