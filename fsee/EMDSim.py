@@ -13,9 +13,9 @@ __all__ = ['prony','FilterMaker','EMDSim','SingleCompartmentSim',
 
 def prony(h, nb, na):
     """Prony's method for time-domain IIR filter design.
-    
+
     Description:
-    
+
       Finds a filter with numerator order na, denominator order nb,
       and having the impulse response in array h.  The IIR filter
       coefficients are returned in length nb+1 and na+1 row vectors b
@@ -30,7 +30,7 @@ def prony(h, nb, na):
 
       b,a -- Numerator and denominator of the iir filter.
     """
-           
+
     zeros = nx.zeros
     transpose = nx.transpose
     toeplitz = scipy.linalg.toeplitz
@@ -38,7 +38,7 @@ def prony(h, nb, na):
     vstack = nx.vstack
     matrixmultiply = nx.dot
     newaxis = nx.newaxis
-    
+
     lstsq = scipy.linalg.lstsq
 
     h = nx.asarray(h)
@@ -51,7 +51,7 @@ def prony(h, nb, na):
     if c==0: # avoid divide by zero
         c=1
     row = zeros((K+1,))
-    row[0] = (h/c)[0] # avoid scipy warning 
+    row[0] = (h/c)[0] # avoid scipy warning
     H = toeplitz(h/c,row)
     if K > N:
         H = H[:,:N+1]
@@ -85,10 +85,10 @@ def log_normal(t,K=1.0,tp=0.020,sigma=0.355):
     # doi:10.1085/jgp.117.1.3
 
     """
-    
+
 V(t)=\exp \left[ -\frac{ \left( \log \frac{t}{t_p}
 \right)^2}{2\sigma^2} \right]
-    
+
     """
     return K*nx.exp(-(nx.log(t/tp)**2)/(2*sigma**2))
 
@@ -110,7 +110,7 @@ def get_complete_log_normal_curve(tp=0.020,sigma=0.355,dt=1.0, eps=1e-15, max_ts
 
 def get_smallest_filter_coefficients( impulse_response ):
     """get b,a that recreate impulse response"""
-    
+
     # step 1. Calculate smallest set of filter coefficients that
     # accurately recreates impulse response (nb==na).
 
@@ -146,7 +146,7 @@ def get_smallest_filter_coefficients( impulse_response ):
         else:
             na += 1
             break
-        
+
     # step 3. Calculate smallest b possible
     nb = nba -1
     while 1:
@@ -157,7 +157,7 @@ def get_smallest_filter_coefficients( impulse_response ):
         else:
             nb += 1
             break
-        
+
     # step 4. Return smallest set of filter coefficients possible
     if nb < na:
         nb = nb
@@ -176,10 +176,10 @@ def test_lognormal():
     sigma = 0.355
     tp = 0.02
     y = unity_gain_log_normal(t,tp=tp,sigma=sigma,dt=1.0/hz)
-    
+
     V = get_complete_log_normal_curve(tp=tp,sigma=sigma,dt=1.0/hz)
     b,a = get_smallest_filter_coefficients( V )
-    
+
     input = nx.zeros(t.shape,dtype=nx.float64)
     input[0]=1 # impulse
     testV = signal.lfilter(b,a,input)
@@ -195,7 +195,7 @@ def compose_transfer_functions(ba0,ba1):
     b = scipy.polymul(b0,b1)
     a = scipy.polymul(a0,a1)
     return (b,a)
-        
+
 class FilterMaker:
     def __init__(self,hz):
         self.hz = float(hz)
@@ -289,15 +289,15 @@ class FilterMaker:
             testlen = min(len(output),len(V))
             assert nx.allclose(output[:testlen],V[:testlen])
         return b,a
-        
+
 class EMDSim:
     def __init__(self,
-                 
+
                  earlyvis_ba = None, # early vision temporal filters, if None, set to Drosophila estimates
                  early_contrast_saturation_params=None, # if None, don't do any contrast saturation
                  emd_lp_ba = None, # delay filter of EMD, if None set to 35 msec
                  emd_hp_ba = None, # highpass tau (can be None)
-                 
+
                  subtraction_imbalance = 1.0, # 1.0 for perfect subtraction
                  lindemann_weight_map = None,
                  compute_typecode = nx.float32,
@@ -308,7 +308,7 @@ class EMDSim:
 
                  # further processing control
                  do_luminance_adaptation=False,
-                 
+
                  preEMD_saturation_s=None,
                  # Note that the implementation of preEMD_saturation
                  # is mathematically equivalent to
@@ -318,7 +318,7 @@ class EMDSim:
             emd_edges = []
 
         self.sign_convention = sign_convention
-        
+
         self.compute_typecode = compute_typecode
         del compute_typecode
         self.n_receptors = n_receptors
@@ -335,7 +335,7 @@ class EMDSim:
                       'values for Drosophila fit to Juusola & Hardie, 2001'
                 tp = 0.02
                 sigma = 0.355
-                
+
                 # It would be nice to do a Laplace transform of the
                 # "log normal" and then convert that to a discrete
                 # time representation, but mathematica couldn't find
@@ -348,7 +348,7 @@ class EMDSim:
                 # represented as an nth order ODE through the use of
                 # Prony's method. So, we could find the Laplace
                 # transform using that.
-                
+
                 V = get_complete_log_normal_curve(tp=tp,sigma=sigma,dt=1.0/hz)
                 self.b_earlyvis, self.a_earlyvis = get_smallest_filter_coefficients(V)
 
@@ -381,7 +381,7 @@ class EMDSim:
         self._luminance_adapted = None
 
         self.early_contrast_saturation_params = early_contrast_saturation_params
-        
+
         self.preEMD_saturation_s=preEMD_saturation_s
         self._D_pre_saturation = None
         self._U_pre_saturation = None
@@ -393,7 +393,7 @@ class EMDSim:
                           'handle b=[1.0],a=[]') # fix one day!
         else:
             self.skip_earlyvis = False
-        
+
         if emd_hp_ba is not None:
             self.do_highpass = True
             # highpass filter
@@ -420,7 +420,7 @@ class EMDSim:
 
         if self.do_luminance_adaptation:
             self.zi_luminance_adaptation = None # set later
-            
+
         if not self.skip_earlyvis:
             z0_earlyvis = nx.zeros( (max(len(self.a_earlyvis),len(self.b_earlyvis))-1,), self.compute_typecode )
             self.zi_earlyvis = nx.resize( z0_earlyvis, (self.n_receptors,len(z0_earlyvis)) ) # repeat to fill array
@@ -439,18 +439,18 @@ class EMDSim:
             weightmap = nx.ones( (self.n_receptors,), self.compute_typecode )
         else:
             weightmap = nx.asarray( lindemann_weight_map ).astype( self.compute_typecode )
-            
+
         self.weights_A = weightmap[self.emd_sideA_idxs]
         self.weights_B = weightmap[self.emd_sideB_idxs]
 
         self.weights_A = self.weights_A[:,nx.newaxis]
         self.weights_B = self.weights_B[:,nx.newaxis]
-            
-        # subtraction imbalance        
+
+        # subtraction imbalance
         self.S = nx.array(subtraction_imbalance,self.compute_typecode)
-        
+
         self.emd_outputs = None
-        
+
         self._earlyvis = None
         self._D = None
         self._U = None
@@ -461,12 +461,12 @@ class EMDSim:
         retinal_image = nx.asarray( responses )
         retinal_image = retinal_image.astype( self.compute_typecode )
         assert retinal_image.shape == (self.n_receptors,)
-        
+
         self._retinal_image = retinal_image[:,nx.newaxis] # we operate on rank-2 arrays
 
         if self.do_luminance_adaptation:
             if self.zi_luminance_adaptation is None:
-                
+
                 # This is the first step, so find filter coefficients
                 # that produce zero output to produce perfectly
                 # adapted filter state.
@@ -513,7 +513,7 @@ class EMDSim:
             #print 'set self._luminance_adapted'
         else:
             self._luminance_adapted = self._retinal_image
-            
+
         # early vision (photoreceptor/LMC) filtering
         if not self.skip_earlyvis:
             self._earlyvis, self.zi_earlyvis = signal.lfilter(self.b_earlyvis,
@@ -563,7 +563,7 @@ class EMDSim:
 ##            print sU[:5],'->',self._U[:5]
             self._U = nx.tanh(self.preEMD_saturation_s*self._U)
             self._D = nx.tanh(self.preEMD_saturation_s*self._D)
-        
+
         # half correlators
         # A * Bdelayed
         self._subunit_A_Bd = self._U[self.emd_sideA_idxs] * self._D[self.emd_sideB_idxs]
@@ -614,7 +614,7 @@ class SingleCompartmentSim:
         self.g0 = 1295
         self.Ee = Ee
         self.Ei_gain = -0.95
-        
+
     def step(self,subunit_A_Bd,subunit_Ad_B):
         # excitatory direction is A * Bd (arbitrary)
 
@@ -635,7 +635,7 @@ class SingleCompartmentSim:
 
         Vm_fast_array = nx.array(Vm_fast,self.compute_typecode)
         Vm_fast_array.shape = 1,1 # make rank 2
-        
+
         Vm_slow, self.zi = signal.lfilter(self.lp_B,
                                           self.lp_A,
                                           Vm_fast_array,
