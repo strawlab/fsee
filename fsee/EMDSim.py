@@ -407,7 +407,7 @@ class EMDSim:
         if emd_lp_ba is None:
             tau_emd = 0.035
             fm = FilterMaker(hz)
-            print '  making EMD lowpass filter: tau ~%d msec'%int(tau_emd*1000.0),
+            print '  making EMD lowpass filter: tau ~%d msec'%int(tau_emd*1000.0)
             self.b_emd, self.a_emd=fm.iir_lowpass1(tau_emd)
         else:
             self.b_emd, self.a_emd=emd_lp_ba
