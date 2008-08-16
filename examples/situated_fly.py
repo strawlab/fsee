@@ -71,12 +71,15 @@ if 1:
     view_ori_vec3 = (cgtypes.quat().fromAngleAxis(camera_yaw_from_pos_y,(0,0,1))*
                      cgtypes.quat().fromAngleAxis(camera_pitch_from_neg_z,(1,0,0))
                      )
+
+    # I should really implement a save_image() function that can use a
+    # different camera than the fly-eye view camera. For now, though,
+    # this is what we've got:
     warnings.warn('view direciton wrong')
     view_ori_quat = cgtypes.quat(1,0,0,0)
-
     vision.step(center, view_ori_quat)
+    vision.save_last_environment_map('situated_fly.png')
 else:
     # view from fly position
     vision.step(pos_vec3,ori_quat)
-
-vision.save_last_environment_map('situated_fly.png')
+    vision.save_last_environment_map('situated_fly.png')
