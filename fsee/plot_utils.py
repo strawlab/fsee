@@ -16,34 +16,27 @@ import numpy
 
 import fsee.eye_geometry.emd_util as emd_util
 import fsee.eye_geometry.switcher
+import drosophila_eye_map.util
 
 # XXX I could refactor this to make basemap required only in a
 # precomputation step.
-
-deg_per_rad = 180/math.pi
 
 #proj = 'moll'
 #proj = 'cyl'
 #proj = 'ortho'
 proj = 'robin'
 
-def xyz2lonlat(x,y,z):
-    try:
-        lat = math.asin(z)*deg_per_rad
-    except ValueError,err:
-        if z>1 and z < 1.1:
-            lat = math.asin(1.0)*deg_per_rad
-        else:
-            raise
-    lon1 = math.atan2(y,x)*deg_per_rad
-    return lon1,lat
+xyz2lonlat = drosophila_eye_map.util.xyz2lonlat # old name
 
 class BasemapInstanceWrapper:
-    def __init__(self,receptor_dirs=None,edges=None,
+    def __init__(self,receptor_dirs=None,
+                 edges=None,
                  hex_faces=None,
                  proj='ortho',
                  optics = None,
                  eye_name = None,
+                 slicer = None,
+                 edge_slicer=None,
                  **basemap_kws):
 
         if optics is not None:
@@ -59,17 +52,19 @@ class BasemapInstanceWrapper:
             self.rdirs = precomputed.receptor_dirs
             self.edges = precomputed.edges
             self.faces = precomputed.hex_faces
+            self.slicer = precomputed.receptor_dir_slicer
+            self.edge_slicer = precomputed.edge_slicer
 
         else:
             # manually specified optics
             self.rdirs = receptor_dirs
             self.edges = edges
             self.faces = hex_faces
+            self.slicer = slicer
+            self.edge_slicer = edge_slicer
 
         self.eye_name = eye_name
 
-        self.slicer = precomputed.receptor_dir_slicer
-        self.edge_slicer = precomputed.edge_slicer
 
         supported_projs = ['moll','cyl','ortho','sinu',
                            'left_stere','right_stere',
