@@ -1,6 +1,6 @@
 # Copyright (C) 2005-2007 California Institute of Technology, All rights reserved
 # Author: Andrew D. Straw
-import cgkit.cgtypes as cgtypes # cgkit 2
+import cgtypes # cgkit 1.x
 import math
 import numpy
 import sets

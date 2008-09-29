@@ -11,7 +11,7 @@ from matplotlib.collections import LineCollection
 import pylab
 import pickle
 import math
-import cgkit.cgtypes as cgtypes # cgkit 2
+import cgtypes # cgkit 1.x
 import numpy
 
 import fsee.eye_geometry.emd_util as emd_util

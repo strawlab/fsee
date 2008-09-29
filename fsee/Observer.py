@@ -1,6 +1,7 @@
 # Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
 # Author: Andrew D. Straw
-import cgkit.cgtypes as cgtypes # cgkit 2.x
+
+import cgtypes # cgkit 1.x
 import fsee
 from fsee.CoreVisualSystem import CoreVisualSystem
 from fsee.eye_geometry.projected_eye_coords import RapidPlotter

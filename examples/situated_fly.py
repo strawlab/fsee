@@ -4,7 +4,7 @@ import os, math, warnings
 
 import numpy as np
 
-import cgkit.cgtypes as cgtypes
+import cgtypes # cgkit 1.x
 
 import fsee
 import fsee.Observer

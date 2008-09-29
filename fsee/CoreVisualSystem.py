@@ -4,7 +4,7 @@ from __future__ import division
 import fsee
 import EMDSim
 
-import cgkit.cgtypes as cgtypes # cgkit 2
+import cgtypes # cgkit 1.x
 import Image
 
 import numpy
