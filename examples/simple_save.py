@@ -2,7 +2,7 @@
 # Author: Andrew D. Straw
 import os
 
-import cgkit.cgtypes as cgtypes
+import cgtypes
 
 import fsee
 import fsee.Observer

@@ -4,8 +4,7 @@
 from __future__ import division
 
 import math, sys, sets, os
-import cgkit # cgkit 2.x
-import cgkit.cgtypes as cgtypes
+import cgtypes # cgkit 1.x
 import numpy
 import scipy
 import scipy.sparse
@@ -270,7 +269,8 @@ if __name__ == '__main__':
     fd.write( 'import scipy\n')
     fd.write( 'import scipy.sparse\n')
     fd.write( 'import scipy.io\n')
-    fd.write( 'import cgkit.cgtypes # cgkit 2\n')
+    fd.write( 'import cgtypes # cgkit 1.x\n')
+    fd.write( 'from cgtypes import vec3, quat #cgkit 1.x\n')
     fd.write( 'import os\n')
     fd.write( 'datadir = os.path.split(__file__)[0]\n')
     fd.write( 'cube_order = %s\n'%repr(cube_order) )

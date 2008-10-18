@@ -1,7 +1,7 @@
 # Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
 import os
 
-import cgkit.cgtypes as cgtypes
+import cgtypes
 
 import fsee
 import fsee.Observer

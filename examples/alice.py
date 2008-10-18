@@ -1,7 +1,7 @@
 import os, math
 import pickle
 
-import cgkit.cgtypes as cgtypes
+import cgtypes
 
 import fsee
 import fsee.Observer
