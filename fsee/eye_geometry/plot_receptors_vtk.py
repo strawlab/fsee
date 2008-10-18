@@ -4,7 +4,7 @@
 from util import get_mean_interommatidial_distance
 
 if __name__ == '__main__':
-    
+
     if 0:
         v2 = [ (v.x, v.y, v.z) for v in receptor_dirs ]
         if 0:
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     if 1:
         import vtk
         from vtk.util.colors import red, purple, banana
-        
+
         def init_vtk():
 
             renWin = vtk.vtkRenderWindow()
@@ -44,10 +44,10 @@ if __name__ == '__main__':
                 ren1.SetActiveCamera( camera )
                 renWin.AddRenderer( ren1 )
                 renderers.append( ren1 )
-                
+
             renWin.SetSize( 1024, 768 )
             return renWin, renderers
-    
+
         def interact_with_renWin(renWin, ren1=None, actor=None):
 
             iren = vtk.vtkRenderWindowInteractor()
@@ -59,7 +59,7 @@ if __name__ == '__main__':
             renWin.Render()
 
             iren.Start()
-            
+
         renWin, renderers = init_vtk()
 
         camera = renderers[0].GetActiveCamera()
@@ -91,8 +91,8 @@ if __name__ == '__main__':
                 textActor.AddPosition(v.x*mult,v.y*mult,v.z*mult)
                 for renderer in renderers:
                     renderer.AddActor( textActor )
-            
-            
+
+
         def vtk_draw(receptor_dirs, triangles, hex_faces, renderers):
             tri_points = vtk.vtkPoints()
             tri_cells = vtk.vtkCellArray()
@@ -100,7 +100,7 @@ if __name__ == '__main__':
             body_line_points = vtk.vtkPoints()
             body_lines = vtk.vtkCellArray()
             body_point_num = 0
-            
+
             for v in receptor_dirs:
                 #if v.z > 0:
                 if 1:
