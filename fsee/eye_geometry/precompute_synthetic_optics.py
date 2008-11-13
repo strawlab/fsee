@@ -1,6 +1,10 @@
 #!/usr/bin/env python
-# Copyright (C) 2005-2008 California Institute of Technology, All rights reserved
+
+# Copyright (C) 2005-2008 California Institute of Technology, All
+# rights reserved
+
 # Author: Andrew D. Straw
+
 from __future__ import division
 
 import math, sys, sets, os
@@ -9,7 +13,7 @@ import numpy
 import scipy
 import scipy.sparse
 import scipy.io
-from drosophila_eye_map.util import cube_order, make_repr_able, save_as_python, \
+from drosophila_eye_map.util import cube_order, make_repr_able, save_as_python,\
      make_receptor_sensitivities, flatten_cubemap
 from emd_util import find_edges, pseudo_voronoi
 
