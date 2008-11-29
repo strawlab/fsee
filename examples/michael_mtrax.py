@@ -19,11 +19,9 @@ def unique(A):
     """
     A = np.asarray(A)
     assert len(A.shape)==1
-    B = list(np.unique1d( A ))
-    j = [ B.index( Ai ) for Ai in A ]
-    i = None
-    B = np.array(B)
-    j = np.array(j)
+    B,i = np.unique1d( A,return_index=True )
+    Blist = list(B)
+    j = np.array([ Blist.index( Ai ) for Ai in A ])
     return B,i,j
 
 def test_unique():
