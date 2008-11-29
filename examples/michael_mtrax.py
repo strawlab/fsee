@@ -88,6 +88,7 @@ def mtrax_mat_to_big_arrays(data):
     return X,Y,THETA, list(idscurr)
 
 if __name__=='__main__':
+    start_frame = int(sys.argv[1])
     data = scipy.io.loadmat('movie20071009_154355.mat')
     #data = scipy.io.loadmat('newsave2.mat')
     print data.keys()
@@ -152,9 +153,15 @@ if __name__=='__main__':
 
     fly_model_node_filename = os.path.join(fsee.data_dir,'models/fly/body.osg')
     model_path = os.path.join(fsee.data_dir,"models/alice_cylinder/alice_cylinder.osg")
+    model_path = os.path.join(fsee.data_dir,"models/alice_cylinder/white_cylinder.osg")
     #model_path = None
     z = 2 # 2 mm
-    for j,id in enumerate(ids):
+    #for j,id in enumerate(ids):
+    if 1:
+
+        j = 1
+        id = 1
+
         print 'doing fly',id
         vision = fsee.Observer.Observer(model_path=model_path,
                                         scale=1000.0,
@@ -166,6 +173,7 @@ if __name__=='__main__':
                                         )
         this_x = X[:,j]
         this_y = Y[:,j]
+
         this_theta = THETA[:,j]
 
         transformed_nodes_by_id = {}
@@ -175,7 +183,8 @@ if __name__=='__main__':
         if 1:
             #for i in range(2000, 3000):
             #for i in range(2244, 2247):
-            for i in range(2200, 2300):
+            #for i in range(2200, 2300):
+            for i in range(start_frame*50, start_frame*50+50):
                 print 'frame',i
                 # other flies
                 all_existing_transforms = set(transformed_nodes_by_id.keys())

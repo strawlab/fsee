@@ -6,6 +6,7 @@ from setuptools.dist import Distribution
 
 fsee_package_data = [
     'data/models/alice_cylinder/*',
+    'data/models/mamarama_checkerboard/*',
     ]
 
 if 1:
