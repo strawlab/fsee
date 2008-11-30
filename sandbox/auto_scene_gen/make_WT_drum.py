@@ -19,7 +19,7 @@ z1 = height
 
 if 1:
     res = 72
-    angles = numpy.linspace( 0.0, 360.0, res+1 )
+    angles = numpy.linspace( 360.0, 0.0, res+1 )
     starts = angles[:-1]
     stops = angles[1:]
 
