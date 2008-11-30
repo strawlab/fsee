@@ -1,4 +1,5 @@
-# Copyright (C) 2005-2007 California Institute of Technology, All rights reserved
+# Copyright (C) 2005-2007 California Institute of Technology,
+# All rights reserved
 # Author: Andrew D. Straw
 import osgwriter
 import math
@@ -12,7 +13,7 @@ class Prim:
         self.normals = []
         self.tex_coords = []
         self.prim_sets = []
-        
+
     def get_as_osg_geometry(self):
         ss = osgwriter.StateSet(self.texture_fname)
         ss.mag_filter = self.mag_filter
@@ -97,7 +98,7 @@ class ZCyl(Prim):
         fracs = numpy.linspace( 0.0, 1.0, res+1 )
         start_frac = fracs[:-1]
         stop_frac = fracs[1:]
-        
+
         angles = fracs*360.0
         starts = angles[:-1]
         stops = angles[1:]
@@ -116,7 +117,7 @@ class ZCyl(Prim):
 
         z0=-1000
         z1=1000
-        
+
         for x0,y0,x1,y1,f0,f1 in zip(start_x,start_y,
                                      stop_x,stop_y,
                                      start_frac,stop_frac):
@@ -135,10 +136,10 @@ class ZCyl(Prim):
                                       [f1,1],
                                       [f1,0],
                                       ])
-            
+
             quads.append( [count,count+1,count+2,count+3] )
             count+=4
-            
+
         self.prim_sets = [Quads(quads)]
 
 def test():
@@ -146,16 +147,16 @@ def test():
     import scipy
 
     geode = osgwriter.Geode()
-    
+
     geode.append(XYRect().get_as_osg_geometry())
     geode.append(XZRect().get_as_osg_geometry())
-    
+
     m = osgwriter.MatrixTransform(scipy.eye(4))
     m.append(geode)
-    
+
     g = osgwriter.Group()
     g.append(m)
     g.save(sys.stdout)
-    
+
 if __name__ == '__main__':
     test()
