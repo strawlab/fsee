@@ -1,9 +1,10 @@
-# Copyright (C) 2005-2007 California Institute of Technology, All rights reserved
+# Copyright (C) 2005-2007 California Institute of Technology,
+# All rights reserved
 # Author: Andrew D. Straw
 class Saves:
     def __init__(self):
         self.spi = 2
-        
+
 class HasChildren(Saves):
     def __init__(self):
         Saves.__init__(self)
@@ -34,20 +35,20 @@ class Array(Saves):
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
-    
+
 class Geode(HasChildren):
     def __init__(self,states=None):
         HasChildren.__init__(self)
         self.myname='Geode'
         self.children_name = 'drawables'
         self.states = states
-        
+
     def save(self,fd,indent=0):
         istr = ' '*indent
         fd.write( '%s%s {\n'%(istr,self.myname))
         indent += self.spi
         istr = ' '*indent
-        
+
         fd.write( '%sDataVariance DYNAMIC\n'%(istr,))
         fd.write( '%scullingActive TRUE\n'%(istr,))
         if self.states is not None:
@@ -79,19 +80,19 @@ class BillboardChild(Saves):
 
         if self.positions is not None:
             fd.write( '%sPositions {\n'%(istr,))
-            
+
             indent += self.spi
             istr2 = ' '*indent
             for p in self.positions:
                 fd.write( '%s%f %f %f\n'%(istr2,p[0],p[1],p[2]))
             fd.write( '%s}\n'%(istr,))
-            
-        
+
+
         #indent += self.spi
         #istr = ' '*indent
-        
+
 class Billboard(Geode):
-        
+
     def __init__(self,*args,**kws):
         if 'positions' in kws:
             positions = kws['positions']
@@ -108,18 +109,18 @@ class StateSet(Saves):
         assert isinstance(texturename,str)
         self.texturename = texturename
         self.mag_filter = "LINEAR"
-        
+
     def save(self,fd,indent=0):
         istr = ' '*indent
         fd.write( '%sStateSet {\n'%(istr,))
-        
+
         indent += self.spi
         istr = ' '*indent
 
         fd.write( '%sDataVariance STATIC\n'%(istr,))
         fd.write( '%srendering_hint DEFAULT_BIN\n'%(istr,))
         fd.write( '%srenderBinMode INHERIT\n'%(istr,))
-        
+
         fd.write( '%stextureUnit 0 {\n'%(istr,))
         indent += self.spi
         istr = ' '*indent
@@ -137,16 +138,16 @@ class StateSet(Saves):
         fd.write( '%smag_filter %s\n'%(istr,self.mag_filter))
         fd.write( '%smaxAnisotropy 1\n'%(istr,))
         fd.write( '%sinternalFormatMode USE_IMAGE_DATA_FORMAT\n'%(istr,))
-        
+
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
 
-        
+
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
-        
+
 
 
         indent -= self.spi
@@ -167,11 +168,11 @@ class Geometry(Saves):
         self.normal_array = normal_array
         self.primitive_sets = primitive_sets
         self.tex_coord_array = tex_coord_array
-        
+
     def save(self,fd,indent=0):
         istr = ' '*indent
         fd.write( '%sGeometry {\n'%(istr,))
-        
+
         indent += self.spi
         istr = ' '*indent
 
@@ -181,16 +182,16 @@ class Geometry(Saves):
         self.normal_array.save(fd,indent=indent)
         self.primitive_sets.save(fd,indent=indent)
         self.tex_coord_array.save(fd,indent=indent)
-        
+
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
-    
+
 class Group(HasChildren):
     def save(self,fd,indent=0):
         istr = ' '*indent
         fd.write( '%sGroup {\n'%(istr,))
-        
+
         indent += self.spi
         istr = ' '*indent
         fd.write( '%sUniqueID osgwriterGroup_%X\n'%(istr,abs(id(self))))
@@ -202,7 +203,7 @@ class Group(HasChildren):
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
-        
+
 class MatrixTransform(HasChildren):
     def __init__(self,M):
         HasChildren.__init__(self)
@@ -210,14 +211,14 @@ class MatrixTransform(HasChildren):
         for i in range(4):
             assert len(M[i]) == 4
         self.M = M
-        
+
     def save(self,fd,indent=4):
         istr = ' '*indent
         fd.write( '%sMatrixTransform {\n'%(istr,))
-        
+
         indent += self.spi
         istr = ' '*indent
-        
+
         fd.write( '%sDataVariance DYNAMIC\n'%(istr,))
         fd.write( '%scullingActive TRUE\n'%(istr,))
         fd.write( '%sreferenceFrame RELATIVE_TO_PARENTS\n'%(istr,))
@@ -246,8 +247,9 @@ class Faces(Saves):
         self.typename = typename
     def save(self,fd,indent=4):
         istr = ' '*indent
-        fd.write( '%sDrawElementsUInt %s %d {\n'%(istr,self.typename,len(self.faces)))
-        
+        fd.write( '%sDrawElementsUInt %s %d {\n'%(
+            istr,self.typename,len(self.faces)))
+
         indent += self.spi
         istr = ' '*indent
 
@@ -257,14 +259,14 @@ class Faces(Saves):
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
-        
+
 class Quads(Faces):
     def __init__(self,quads):
         Faces.__init__(self,quads,'QUADS')
 class Tris(Faces):
     def __init__(self,tris):
         Faces.__init__(self,tris,'TRIANGLES')
-        
+
 class PrimitiveSets(Saves):
     def __init__(self):
         Saves.__init__(self)
@@ -274,7 +276,7 @@ class PrimitiveSets(Saves):
     def save(self,fd,indent=4):
         istr = ' '*indent
         fd.write( '%sPrimitiveSets %d {\n'%(istr,len(self.prim_sets)))
-        
+
         indent += self.spi
         istr = ' '*indent
 
@@ -284,8 +286,8 @@ class PrimitiveSets(Saves):
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
-        
-    
+
+
 def test():
     import sys
     import scipy
@@ -300,20 +302,20 @@ def test():
     prim_sets = PrimitiveSets()
     quads = Quads([[0,1,2,3],[5,6,7,4]])
     prim_sets.append(quads)
-    
+
     geom = Geometry(ss,
                     verts,
                     normals,
                     prim_sets,
                     tex_coords)
     #geom.append()
-    
+
     geode = Geode()
     geode.append(geom)
-    
+
     m = MatrixTransform(scipy.eye(4))
     m.append(geode)
-    
+
     g = Group()
     g.append(m)
     g.save(sys.stdout)
