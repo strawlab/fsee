@@ -413,6 +413,7 @@ def plot_receptor_and_emd_fig( R=None,G=None,B=None,
                                emd_linewidth=0.3,
                                force_grid_lines = None,
                                optics = None,
+                               basemap_lw = 0.1,
                                proj = None):
 
     def do_overlay_receptor_circles(ax,biw,eye_name):
@@ -424,7 +425,6 @@ def plot_receptor_and_emd_fig( R=None,G=None,B=None,
                  markeredgecolor='black')
     def draw_extra_lines(ax,biw):
         if draw_lines:  # grid
-            basemap_lw = 0.1
 
             delat = 20.
             circles = numpy.arange(0.,90.,delat).tolist()+\
