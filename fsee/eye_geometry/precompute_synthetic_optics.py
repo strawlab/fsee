@@ -20,7 +20,7 @@ from emd_util import find_edges, pseudo_voronoi
 # XXX we should make delta_phi depend on distance to nearest neighbors
 # and thus be space-variant.
 
-def make_receptor_dirs(n_subdivides=3):
+def make_subdivided_unit_icosahedron(n_subdivides=3):
     # subdivides icosahedron.
     # http://en.wikipedia.org/wiki/Icosahedron
     phi = (1+math.sqrt(5))/2
@@ -42,13 +42,6 @@ def make_receptor_dirs(n_subdivides=3):
     for o in [-1,1]:
         for p in [-phi,phi]:
             verts.append( make_vert(p, 0, o) )
-
-    if 0:
-        # This was piped to qhull "qhull i < receptors.qhull"
-        print '3'
-        print len(verts)
-        for v in verts:
-            print ' '.join(map(repr,v))
 
     #
     qres= """5 10 8
@@ -196,7 +189,7 @@ if __name__ == '__main__':
 #    SAVE INFO (from save_sparse_weights.py)
 ########################################################
 
-    receptor_dirs, tris = make_receptor_dirs(n_subdivides=3) # n_subidivisions
+    receptor_dirs, tris = make_subdivided_unit_icosahedron(n_subdivides=3) # n_subidivisions
     receptors_by_phi = sort_receptors_by_phi(receptor_dirs,nbins = 32)
     edges = find_edges( tris )
     verts = receptor_dirs
