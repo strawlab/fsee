@@ -857,4 +857,15 @@ FsoiErr fsoi_ng_shutdown() {
   return FsoiNoErr;
 }
 
+FsoiErr fsoi_ng_get_world_point(FsoiObj* theobj,
+                                double* result_x,double* result_y,double*result_z,
+                                double* v1_x, double* v1_y, double* v1_z,
+                                double* v2_x, double* v2_y, double* v2_z) {
+  MyFsoiObj* mfo = (MyFsoiObj*)theobj->the_cpp_obj;
+  mfo->getWorldPoint(result_x,result_y,result_z,
+                     v1_x,v1_y,v1_z,
+                     v2_x,v2_y,v2_z);
+  return FsoiNoErr;
+}
+
 } // closes: extern "C"
