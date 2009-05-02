@@ -56,10 +56,10 @@ FSOI_NG_API FsoiErr fsoi_ng_delete(FsoiObj*);
 
 FSOI_NG_API FsoiErr fsoi_ng_run(FsoiObj*);
 
-FSOI_NG_API FsoiErr fsoi_ng_get_world_point(FsoiObj*,
-                                            double* result_x,double* result_y,double*result_z,
-                                            double* v1_x, double* v1_y, double* v1_z,
-                                            double* v2_x, double* v2_y, double* v2_z);
+FSOI_NG_API FsoiErr fsoi_ng_get_world_point(FsoiObj* theobj,
+                                            double* result_x, double* result_y, double* result_z, int* is_hit,
+                                            double vstart_x, double vstart_y, double vstart_z,
+                                            double vend_x, double vend_y, double vend_z);
 
 FSOI_NG_API FsoiErr fsoi_ng_render_frame(FsoiObj* theobj,unsigned char** image_data_ptr, int* width, int* height, int* bytes_per_pixel);
 FSOI_NG_API FsoiErr fsoi_ng_render_frame_copy(FsoiObj* theobj,unsigned char* image_data, int width, int height, int bytes_per_pixel);
