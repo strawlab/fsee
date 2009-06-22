@@ -203,6 +203,7 @@ class Observer: # almost a sub-class of CoreVisualSystem
         qi=q.inverse()
 
         vel_vecs = []
+        mu_list = []
         dir_body_list = []
         dir_world_list = []
 
@@ -265,5 +266,6 @@ class Observer: # almost a sub-class of CoreVisualSystem
             vr = R*vr                         
             # vr[0]: r (should be zero), vr[1]: theta, vr[2]: phi
             vel_vecs.append([vr[1],vr[2]])
+            mu_list.append(mu)
                         
-        return vel_vecs
+        return vel_vecs, mu_list
