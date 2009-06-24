@@ -10,8 +10,10 @@ import pkg_resources
 import ctypes
 assert ctypes.__version__ >= '1.0.1'
 
-if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
+if sys.platform.startswith('linux'):
     backend_fname = 'libfsoi_ng.so'
+elif sys.platform.startswith('darwin'):
+	backend_fname = 'libfsoi_ng.dylib'
 elif sys.platform.startswith('win'):
     backend_fname = 'fsoi_ng.dll'
 else:
