@@ -6,6 +6,7 @@ import numpy
 import scipy
 import scipy.signal as signal
 import warnings
+import sys
 
 __all__ = ['prony','FilterMaker','EMDSim','SingleCompartmentSim',
            'log_normal', 'unity_gain_log_normal',
@@ -331,8 +332,8 @@ class EMDSim:
         if earlyvis_ba is None:
             if 1:
                 #print 'IMPORTANT: using photoreceptor values for Drosophila'
-                print 'IMPORTANT: using photoreceptor temporal dynamics '\
-                      'values for Drosophila fit to Juusola & Hardie, 2001'
+                sys.stderr.write("fsee: EMDsim.py: IMPORTANT: using photoreceptor temporal dynamics " + 
+                      "values for Drosophila fit to Juusola & Hardie, 2001\n");
                 tp = 0.02
                 sigma = 0.355
 
@@ -377,7 +378,7 @@ class EMDSim:
             del tmpfm
             del tmptau
         else:
-            print "Not using EMDSim.py's quick luminance adaptation"
+            sys.stderr.write("fsee: EMDsim.py: Not using EMDSim.py's quick luminance adaptation\n")
         self._luminance_adapted = None
 
         self.early_contrast_saturation_params = early_contrast_saturation_params
@@ -407,7 +408,7 @@ class EMDSim:
         if emd_lp_ba is None:
             tau_emd = 0.035
             fm = FilterMaker(hz)
-            print '  making EMD lowpass filter: tau ~%d msec'%int(tau_emd*1000.0)
+            sys.stderr.write('fsee: EMDsim.py: making EMD lowpass filter: tau ~%d msec\n'%int(tau_emd*1000.0))
             self.b_emd, self.a_emd=fm.iir_lowpass1(tau_emd)
         else:
             self.b_emd, self.a_emd=emd_lp_ba
