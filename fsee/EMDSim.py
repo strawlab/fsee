@@ -354,7 +354,7 @@ class EMDSim:
                 self.b_earlyvis, self.a_earlyvis = get_smallest_filter_coefficients(V)
 
             else:
-                print 'IMPORTANT: using photoreceptor values for Eristalis'
+                sys.stderr.write('fsee: EMDSim.py: IMPORTANT: using photoreceptor values for Eristalis\n')
                 if hz != 200.0:
                     raise ValueError('Photoreceptor fits for 200 Hz. Use fit_photoreceptor')
 
@@ -372,8 +372,8 @@ class EMDSim:
         if self.do_luminance_adaptation: # luminance adaptation
             tmpfm=FilterMaker(hz)
             tmptau=.1#5.0
-            print ('Using luminance adaptation with 1st-order '
-                   'highpass, tau = %f seconds.'%tmptau)
+            sys.stderr.write('fsee: EMDSim.py: Using luminance adaptation with 1st-order '
+                   'highpass, tau = %f seconds.\n'%tmptau)
             self.b_lum_adapt,self.a_lum_adapt = tmpfm.iir_highpass1(tau=tmptau,analytic=True)
             del tmpfm
             del tmptau
