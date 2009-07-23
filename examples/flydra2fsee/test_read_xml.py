@@ -4,7 +4,7 @@ import pkg_resources
 if 1:
     # deal with old files, forcing to numpy
     import tables.flavor
-    tables.flavor.restrict_flavors(keep=['numpy'])
+    tables.flavor.restrict_flavors(keep=['numpy','python'])
 import sets, os, sys, math, time
 
 import numpy
