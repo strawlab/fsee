@@ -45,9 +45,14 @@ class Observer: # almost a sub-class of CoreVisualSystem
 
                  optics=None,
                  do_luminance_adaptation=None,
-
+                 plot_realtime=False
                  ):
-        self.rp = RapidPlotter(optics=optics)
+        # AC: This is initialized only if we want to use it (later)
+        # self.rp = RapidPlotter(optics=optics)
+        self.rp = None
+        self.plot_realtime = plot_realtime
+        
+        self.optics = optics
         self.cubemap_face_xres=cuberes
         self.cubemap_face_yres=cuberes
 
@@ -114,7 +119,10 @@ class Observer: # almost a sub-class of CoreVisualSystem
                 v = v.normalize() # make unit length
                 self.emd_dirs_unrotated_quats.append( cgtypes.quat(0,v.x,v.y,v.z))
 
-        if 1:
+        if self.plot_realtime:
+            if self.rp is None:
+                self.rp = RapidPlotter(optics=self.optics)
+                
             # strictly optional - realtime plotting stuff
             minx = numpy.inf
             maxx = -numpy.inf
@@ -168,7 +176,7 @@ class Observer: # almost a sub-class of CoreVisualSystem
         self.last_pos_vec3 = pos_vec3
         self.last_ori_quat = ori_quat
 
-        if 1:
+        if self.plot_realtime:
             if self.full_spectrum:
                 R = self.get_last_retinal_imageR()
                 G = self.get_last_retinal_imageG()
