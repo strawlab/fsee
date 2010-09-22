@@ -35,6 +35,8 @@ extern "C" {
 #include <osgGA/TrackballManipulator>
 
 #include <osgUtil/SmoothingVisitor>
+#include <osgUtil/LineSegmentIntersector>
+#include <osgUtil/IntersectionVisitor>
 
 #include <osgDB/Registry>
 #include <osgDB/ReadFile>
@@ -510,6 +512,29 @@ public:
     _eyemap_projection[num]->setMatrix( osg::Matrix::ortho2D(x1,x2,y1,y2));
   }
 
+  void getWorldPoint(double* rx, double* ry, double* rz, int* is_hit,
+		     double vstart_x, double vstart_y, double vstart_z,
+		     double vend_x, double vend_y, double vend_z) {
+    osg::Vec3d vstart = osg::Vec3d(vstart_x, vstart_y, vstart_z);
+    osg::Vec3d vend = osg::Vec3d(vend_x, vend_y, vend_z);
+    osg::ref_ptr<osgUtil::LineSegmentIntersector> seg = new osgUtil::LineSegmentIntersector(vstart, vend);
+
+    osgUtil::IntersectionVisitor iv;
+    iv.setIntersector(seg.get());
+    rootNode->accept(iv);
+
+    if (seg->containsIntersections()) {
+      osg::Vec3d p = seg->getFirstIntersection().getWorldIntersectPoint();
+      *rx = p.x();
+      *ry = p.y();
+      *rz = p.z();
+      *is_hit = 1;
+    }
+    else {
+      *is_hit = 0;
+    }
+  }
+
   void run() {
     // the mainloop
     while (!viewer.done())
@@ -854,6 +879,17 @@ FsoiErr fsoi_ng_set_eyemap_geometry( FsoiObj* theobj, int num, float* vert_array
 
 FsoiErr fsoi_ng_shutdown() {
   DPRINTF("shutdown\n");
+  return FsoiNoErr;
+}
+
+FsoiErr fsoi_ng_get_world_point(FsoiObj* theobj,
+                                double* result_x, double* result_y, double* result_z, int* is_hit,
+                                double vstart_x, double vstart_y, double vstart_z,
+                                double vend_x, double vend_y, double vend_z) {
+  MyFsoiObj* mfo = (MyFsoiObj*)theobj->the_cpp_obj;
+  mfo->getWorldPoint(result_x, result_y, result_z, is_hit,
+                     vstart_x, vstart_y, vstart_z,
+                     vend_x, vend_y, vend_z);
   return FsoiNoErr;
 }
 
