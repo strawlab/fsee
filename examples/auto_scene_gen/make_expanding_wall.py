@@ -42,15 +42,25 @@ if 1:
         plt.plot(np.cos(tt),np.sin(tt),'b-')
 
     plt.plot([0],[0],'rx')
-    #plt.plot([0],[0],'ro')
+
+    angle = 30*D2R
+    dist2 = -1.5
+
+    plt.plot([dist2*np.cos(angle)],[dist2*np.sin(angle)],'rx')
+
+    dist3 = 0.5
+
+    plt.plot([dist3*np.cos(angle)],[dist3*np.sin(angle)],'rx')
 
     if 1:
         tt = np.linspace(0,2*np.pi, 30 )
         plt.plot( post_x + post_r*np.cos(tt), post_y+post_r*np.sin(tt), 'k-' )
 
     plt.gca().set_aspect('equal')
-    plt.gca().set_xlim([-1,2])
-    plt.show()
+    plt.gca().set_xlim([-2,2])
+    plt.gca().set_ylim([-2,2])
+    plt.savefig('top-view.svg')
+    #plt.show()
 
 # units in m
 height = 20.0

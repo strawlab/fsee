@@ -35,8 +35,9 @@ vision = fsee.Observer.Observer(model_path=model_path,
                                 )
 if 1:
     angle = 30*D2R
-    dist = 0.3
-    ext = 'png'
+    dist2 = -1.5
+    dist3 = 0.5
+    ext = 'svg'
 
     # view from fly position
     pos_vec3 = cgtypes.vec3(0,0,10.0)
@@ -55,8 +56,8 @@ if 1:
         proj='stere',
         dpi=200)
 
-    pos_vec3 = cgtypes.vec3(dist*np.cos(angle),dist*np.sin(angle),10.0)
-    ori_quat = cgtypes.quat().fromAngleAxis( 30*D2R,(0,0,1))
+    pos_vec3 = cgtypes.vec3(dist2*np.cos(angle),dist2*np.sin(angle),10.0)
+    ori_quat = cgtypes.quat().fromAngleAxis( angle,(0,0,1))
     vision.step(pos_vec3,ori_quat)
     vision.save_last_environment_map('expanding_wall2.png')
 
@@ -67,6 +68,22 @@ if 1:
     fsee.plot_utils.plot_receptor_and_emd_fig(
         R=R,G=G,B=B,#emds=emds,
         save_fname='expanding_wall_flyeye2.%s'%ext,
+        optics = vision.get_optics(),
+        proj='stere',
+        dpi=200)
+
+    pos_vec3 = cgtypes.vec3(dist3*np.cos(angle),dist3*np.sin(angle),10.0)
+    ori_quat = cgtypes.quat().fromAngleAxis( angle,(0,0,1))
+    vision.step(pos_vec3,ori_quat)
+    vision.save_last_environment_map('expanding_wall3.png')
+
+    R=vision.get_last_retinal_imageR()
+    G=vision.get_last_retinal_imageG()
+    B=vision.get_last_retinal_imageB()
+    #emds = vision.get_last_emd_outputs()
+    fsee.plot_utils.plot_receptor_and_emd_fig(
+        R=R,G=G,B=B,#emds=emds,
+        save_fname='expanding_wall_flyeye3.%s'%ext,
         optics = vision.get_optics(),
         proj='stere',
         dpi=200)
