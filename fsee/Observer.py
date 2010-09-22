@@ -45,9 +45,14 @@ class Observer: # almost a sub-class of CoreVisualSystem
 
                  optics=None,
                  do_luminance_adaptation=None,
-
+                 plot_realtime=False
                  ):
-        self.rp = RapidPlotter(optics=optics)
+        # AC: This is initialized only if we want to use it (later)
+        # self.rp = RapidPlotter(optics=optics)
+        self.rp = None
+        self.plot_realtime = plot_realtime
+        
+        self.optics = optics
         self.cubemap_face_xres=cuberes
         self.cubemap_face_yres=cuberes
 
@@ -114,7 +119,10 @@ class Observer: # almost a sub-class of CoreVisualSystem
                 v = v.normalize() # make unit length
                 self.emd_dirs_unrotated_quats.append( cgtypes.quat(0,v.x,v.y,v.z))
 
-        if 1:
+        if self.plot_realtime:
+            if self.rp is None:
+                self.rp = RapidPlotter(optics=self.optics)
+                
             # strictly optional - realtime plotting stuff
             minx = numpy.inf
             maxx = -numpy.inf
@@ -168,7 +176,7 @@ class Observer: # almost a sub-class of CoreVisualSystem
         self.last_pos_vec3 = pos_vec3
         self.last_ori_quat = ori_quat
 
-        if 1:
+        if self.plot_realtime:
             if self.full_spectrum:
                 R = self.get_last_retinal_imageR()
                 G = self.get_last_retinal_imageG()
@@ -195,100 +203,77 @@ class Observer: # almost a sub-class of CoreVisualSystem
         else:
             return self.get_known_node_parent(parent)
 
-    def get_last_retinal_velocities(self, vel_vec3=None, angular_vel=None):
-        # Retinal motion is in opposite direction from self motion, so
-        # flip sign.
-        angular_vel_from_rotation = -angular_vel
+    def get_last_retinal_velocities(self, vel_vec3, angular_vel, direction='ommatidia'):
+        # NOTE: Both vel_vec3 and angular_vel should be in body frame
 
         x=self.last_pos_vec3 # eye origin
-        tx=tuple(x)
-        v3tx=osg.Vec3(*tx)
-
         q=self.last_ori_quat
         qi=q.inverse()
 
-        root = self.sim.get_root_node()
-        geode2known_node = {}
-
         vel_vecs = []
+        mu_list = []
+        dir_body_list = []
+        dir_world_list = []
 
-        for emd_dir_unrotated_quat in self.emd_dirs_unrotated_quats:
-            # rotate emd_dirs
-            emd_dir_quat=q*emd_dir_unrotated_quat*qi # q.rotate(emd_dir_unrotated_quat)
-            emd_dir = cgtypes.vec3(emd_dir_quat.x,
-                                   emd_dir_quat.y,
-                                   emd_dir_quat.z)
+        if direction == 'ommatidia':
+            dir_body_list = self.cvs.precomputed_optics_module.receptor_dirs
+            for dir_body in dir_body_list:
+                dir_world_quat = q*cgtypes.quat(0,dir_body.x, dir_body.y, dir_body.z)*qi
+                dir_world_list.append(cgtypes.vec3(dir_world_quat.x,
+                                                   dir_world_quat.y,
+                                                   dir_world_quat.z))
+        elif direction == 'emds':
+            dir_body_quats = self.emd_dirs_unrotated_quats
+            for dir_body_quat in dir_body_quats:
+                dir_world_quat=q*dir_body_quat*qi # dir_body_quat.rotate(q)
+                dir_world_list.append(cgtypes.vec3(dir_world_quat.x,
+                                                   dir_world_quat.y,
+                                                   dir_world_quat.z))
+                dir_body_list.append(cgtypes.vec3(dir_body_quat.x,
+                                                  dir_body_quat.y,
+                                                  dir_body_quat.z))
+        else:
+            print 'ERROR: Directions need to be either ommatidia or EMDs.'
+            quit()
+            
+        # Need a more efficient way to do this loop
+        for n in range(len(dir_body_list)):
+            dir_body = dir_body_list[n]
+            dir_world = dir_world_list[n]
 
-            # Calculate translational component of retinal velocities
-
-            # make unit length (should already be within floating
-            # point error)
-            emd_dir = emd_dir.normalize()
-
-            y=x+(emd_dir*1e20) # XXX should figure out maximum length in OSG
-            seg=osg.LineSegment()
-            seg.set(v3tx,osg.Vec3(*tuple(y)))
-
-            iv = osgUtil.IntersectVisitor()
-            iv.addLineSegment(seg)
-            root.accept(iv)
-
-            if iv.hits():
-                hitlist = iv.getHitList(seg)
-                hit = hitlist.front()
-                geode = hit.getGeode()
-                # previous lookup results were cached, check there first
-                known_node = geode2known_node.setdefault( geode, self.get_known_node_parent(geode) )
-                #print 'found',self.nodes2names[known_node]
-
-                hit_absolute_vel = self.nodes2vels[known_node]
-                # XXX no account is taken of node's angular velocity (yet)
-
-                if hit_absolute_vel is None:
-                    # no relative translational motion, e.g. skybox
-                    hit_relative_vel = cgtypes.vec3(0,0,0)
-                    d0n = emd_dir
-                    d1n = emd_dir
-                else:
-                    hit_relative_vel = hit_absolute_vel - vel_vec3
-
-                    p = hit.getWorldIntersectPoint()
-                    x0=cgtypes.vec3(p[0],p[1],p[2])
-                    x1=x0+hit_relative_vel
-
-                    if 0:
-                        # slightly slower, but for clarity
-                        d0=x0-x
-                        d0n = d0.normalize()
-                    else:
-                        # slightly faster
-                        d0n = emd_dir
-
-                    d1=x1-x
-                    d1n = d1.normalize()
-
+            vend = x + (dir_world*1e5) # XXX should figure out maximum length in OSG
+            vstart = x + (dir_world*1e-5) # avoid intesecting with the origin
+            
+            rx, ry, rz, is_hit = self.sim.get_world_point(vstart, vend)
+            
+            if is_hit == 1: # is_hit is always 1 in the presence of skybox
+                sigma = (cgtypes.vec3(rx,ry,rz) - x).length() # distance
+                mu = 1.0/sigma
             else:
-                # this happens if there is no skybox
-                d0n = emd_dir
-                d1n = emd_dir
+                mu = 0.0          # objects are at infinity
 
-            # Now translational components are in d1n, rotate with angular velocity
+            # Use the formula in Sean Humbert's paper to calculate retinal velocity
+            vr = - angular_vel.cross(dir_body) - mu * (vel_vec3 - dir_body * (dir_body*vel_vec3))
 
-            # d0n : EMD direction
-            # d1n : object direction after object & observers translational velocities accounted for
+            # Convert vr into spherical coordinates
+            # Equation: cf http://en.wikipedia.org/wiki/Vector_fields_in_cylindrical_and_spherical_coordinates
+            sx = dir_body.x
+            sy = dir_body.y
+            sz = dir_body.z
+            phi = numpy.math.atan2(sy,sx)
+            theta = numpy.math.acos(sz)
 
-            # projection of linear translation velocity onto sphere
-            angular_vel_from_translation = d0n.angle(d1n) * d0n.cross(d1n)
+            cphi = numpy.cos(phi)
+            sphi = numpy.sin(phi)
+            ctheta = numpy.cos(theta)
+            stheta = numpy.sin(theta)
 
-            total_angular_vel = angular_vel_from_rotation + angular_vel_from_translation
-
-            if 0:
-                print 'd0n',d0n
-                print 'd1n',d1n
-                print 'angular_vel_from_translation',angular_vel_from_translation
-                print 'total_angular_vel',total_angular_vel
-                print
-
-            vel_vecs.append( total_angular_vel )
-
-        return vel_vecs
+            R = cgtypes.mat3(stheta*cphi, stheta*sphi, ctheta, 
+                             ctheta*cphi, ctheta*sphi, -stheta,
+                             -sphi, cphi, 0)  # Row-major order
+            vr = R*vr                         
+            # vr[0]: r (should be zero), vr[1]: theta, vr[2]: phi
+            vel_vecs.append([vr[1],vr[2]])
+            mu_list.append(mu)
+                        
+        return vel_vecs, mu_list

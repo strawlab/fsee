@@ -125,6 +125,20 @@ c_fsoi_ng.fsoi_ng_set_eyemap_projection.argtypes = [ctypes.POINTER(FsoiObj),
                                                     ctypes.c_float,
                                                     ctypes.c_float,
                                                     ctypes.c_float]
+
+c_fsoi_ng.fsoi_ng_get_world_point.restype = ctypes.c_int
+c_fsoi_ng.fsoi_ng_get_world_point.argtypes = [ctypes.POINTER(FsoiObj),
+                                              ctypes.POINTER(ctypes.c_double),
+                                              ctypes.POINTER(ctypes.c_double),
+                                              ctypes.POINTER(ctypes.c_double),
+                                              ctypes.POINTER(ctypes.c_int),
+                                              ctypes.c_double,
+                                              ctypes.c_double,
+                                              ctypes.c_double,
+                                              ctypes.c_double,
+                                              ctypes.c_double,
+                                              ctypes.c_double]
+
 c_fsoi_ng.fsoi_ng_set_eyemap_face_colors.restype = ctypes.c_int
 c_fsoi_ng.fsoi_ng_set_eyemap_face_colors.argtypes = [ctypes.POINTER(FsoiObj),
                                                      ctypes.c_int,
@@ -266,6 +280,17 @@ class Simulation:
 
     def set_eyemap_projection(self, num, x1, x2, y1, y2 ):
         CHK(c_fsoi_ng.fsoi_ng_set_eyemap_projection(self.fsoi,num,x1, x2, y1, y2 ))
+
+    def get_world_point(self, vstart, vend):
+        rx = ctypes.c_double()
+        ry = ctypes.c_double()
+        rz = ctypes.c_double()
+        is_hit = ctypes.c_int()
+        CHK(c_fsoi_ng.fsoi_ng_get_world_point(self.fsoi,
+                                              ctypes.byref(rx), ctypes.byref(ry), ctypes.byref(rz), ctypes.byref(is_hit),
+                                              vstart.x, vstart.y, vstart.z,
+                                              vend.x, vend.y, vend.z))
+        return (rx.value, ry.value, rz.value, is_hit.value)
 
     def set_eyemap_face_colors(self, num, RGBA_array ):
         assert RGBA_array.shape[1] == 4

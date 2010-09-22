@@ -143,9 +143,11 @@ class StateSet(Saves):
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
 
+
         indent -= self.spi
         istr = ' '*indent
         fd.write( '%s}\n'%(istr,))
+
 
 
         indent -= self.spi
