@@ -12,23 +12,13 @@ Install dependencies: ::
 
 	$ sudo apt-get install libopenscenegraph-dev
 
+Also, get cgkit from Andrew's PPA https://launchpad.net/~astraw/+archive/ppa
 
 Compile ``fsoi``: ::
 
 	$ cd src/fsoi
 	$ scons
-	
-Download  ``cgkit`` 1.2.0 from the website. Before installing, you have to do two changes.
-Recompile ``cgtypes`` using: ::
 
-	$ pyrexc cgtypes.pyx
-	
-Also you have to modify some includes: ::
-
-	src/noisemodule.cpp: iostream.h -> iostream
-	
-	
-	
 Notes about ``basemap``
 ----------------------
 
