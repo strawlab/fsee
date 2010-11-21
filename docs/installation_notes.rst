@@ -1,10 +1,20 @@
 Installing on OS X
 ==================
 
+Leopard (10.5)
+--------------
+
 (AC) I can confirm that now fsee works on OS X (Leopard). However, it
 took several steps of which I lost track. But: do try, it is indeed
 possible.
 
+
+Snow Leopard (10.6)
+-------------------
+
+You can install some required libraries using Macports:
+
+	$ sudo port install OpenSceneGraph scons
 
 Installing on Ubuntu Lucid
 ==========================

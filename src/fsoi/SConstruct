@@ -13,8 +13,14 @@ if int(debug):
 
 def add_osg_opts(kws):
     if sys.platform.startswith('darwin'):
-        kws.setdefault('LINKFLAGS',[]).extend('-framework osg -framework OpenThreads -framework osgText -framework osgDB -framework osgUtil -framework osgGA -framework osgViewer'.split())
-        kws.setdefault('CPPDEFINES',{}).update({'__USE_OSX_CGL_IMPLEMENTATION__':None})
+        if os.path.exists('/opt/local/include/osg'):
+            print "Using Macports's OSG version in /opt/local"
+            env.Append(CPPPATH=['/opt/local/include/'],
+                       LIBPATH=['/opt/local/lib/'], 
+                       LIBS=['osg', 'OpenThreads', 'osgText', 'osgDB', 'osgUtil', 'osgGA', 'osgViewer'])
+        else:
+            kws.setdefault('LINKFLAGS',[]).extend('-framework osg -framework OpenThreads -framework osgText -framework osgDB -framework osgUtil -framework osgGA -framework osgViewer'.split())
+            kws.setdefault('CPPDEFINES',{}).update({'__USE_OSX_CGL_IMPLEMENTATION__':None})
         #kws.setdefault('CPPDEFINES',{}).update({'__USE_OSX_AGL_IMPLEMENTATION__':None})
     else:
         if sys.platform.startswith('win'):
@@ -55,10 +61,11 @@ if 1:
                 kws.setdefault('CPPDEFINES',{}).update({'FSOI_NG_DLL':None,
                                                        })
 
+            
             env.Program(target='fsoi_ng_test',
                         source=['fsoi_ng_test.c'],
-                        LIBS=[lib_fsoi_ng],
-                        #LIBPATH=[shlib_target],
+                        LIBS=[lib_fsoi_ng], 
+#                        LIBPATH=[shlib_target],
                         **kws)
     else:
         prog_kws = {}
