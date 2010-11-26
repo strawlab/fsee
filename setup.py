@@ -106,6 +106,7 @@ setup(name="fsee",
       author="Andrew Straw",
       author_email="strawman@astraw.com",
       version='0.2', # keep in sync with fsee/__init__.py
+      install_requires=['PIL'],
       packages = find_packages(),
       package_data = package_data,
       distclass = PlatformDependentDistribution,
