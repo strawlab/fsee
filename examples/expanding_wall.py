@@ -1,9 +1,6 @@
 # Copyright (C) 2010 California Institute of Technology, All rights reserved
 # Author: Andrew D. Straw
-import os, math, warnings
-
-import numpy as np
-
+import os 
 import cgtypes # cgkit 1.x
 
 from matplotlib import rcParams
@@ -17,7 +14,6 @@ rcParams['axes.labelsize'] = font_size
 rcParams['xtick.labelsize'] = font_size
 rcParams['ytick.labelsize'] = font_size
 
-import fsee
 import fsee.Observer
 import fsee.plot_utils
 import numpy as np
