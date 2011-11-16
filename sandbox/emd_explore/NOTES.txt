@@ -1,0 +1,15 @@
+= lindemann.py =
+
+Run simulation using standard, single compartment model. This saves
+conductances to .h5 files for later playback throught
+multi-compartmental models.
+
+= run_lindemann.py =
+
+Runs lindemann.py on all image files for a range of speeds. Driver
+script for lindemann.py, optionally using seppo.
+
+= full_compartment_sim_run.py =
+
+Makes list of commands for multi-compartment models to be run. It
+prints calls to full_compartment_sim.py.
