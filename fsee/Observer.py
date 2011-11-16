@@ -4,7 +4,6 @@
 import cgtypes # cgkit 1.x
 import fsee
 from fsee.CoreVisualSystem import CoreVisualSystem
-from fsee.eye_geometry.projected_eye_coords import RapidPlotter
 import fsee.eye_geometry.switcher
 
 import os
@@ -121,6 +120,7 @@ class Observer: # almost a sub-class of CoreVisualSystem
 
         if self.plot_realtime:
             if self.rp is None:
+                from fsee.eye_geometry.projected_eye_coords import RapidPlotter
                 self.rp = RapidPlotter(optics=self.optics)
                 
             # strictly optional - realtime plotting stuff

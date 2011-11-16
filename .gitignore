@@ -1,1 +1,5 @@
 fsee.egg-info
+build
+dist
+fsee/libfsoi_ng.dylib
+src/fsoi/libfsoi_ng.dylib
