@@ -1,5 +1,5 @@
 import math
-import scipy as nx
+import numpy as np
 import fsee.eye_geometry.cyl_proj as cyl_proj
 import fsee.EMDSim as EMDSim
 
@@ -52,15 +52,15 @@ def make_weight_map(eye):
 
     phi_deg = phi*R2D
     theta_deg = theta*R2D
-    horiz_component_minus = nx.exp(-(1/sigma_phi_minus*(phi_deg-phi_deg_center))**2)
-    horiz_component_plus = nx.exp(-(1/sigma_phi_plus*(phi_deg-phi_deg_center))**2)
-    horiz_component = nx.where( phi_deg >= phi_deg_center,
+    horiz_component_minus = np.exp(-(1/sigma_phi_minus*(phi_deg-phi_deg_center))**2)
+    horiz_component_plus = np.exp(-(1/sigma_phi_plus*(phi_deg-phi_deg_center))**2)
+    horiz_component = np.where( phi_deg >= phi_deg_center,
                                    horiz_component_plus,
                                    horiz_component_minus )
     sigma_theta = 33.0
-    vert_component = nx.exp(-(1/sigma_theta*theta_deg)**2)
+    vert_component = np.exp(-(1/sigma_theta*theta_deg)**2)
 
-    weightmap = nx.outerproduct( vert_component, horiz_component )
-    weightmap = nx.ravel( weightmap )
+    weightmap = np.outer( vert_component, horiz_component )
+    weightmap = np.ravel( weightmap )
     return weightmap
 

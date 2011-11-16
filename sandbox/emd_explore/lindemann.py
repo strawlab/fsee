@@ -1,7 +1,9 @@
 import glob, os, math
 import Image
 import numpy as nx
+import numpy as np
 import scipy.signal as signal
+import scipy.ndimage as nd_image
 import pickle
 import weight_map
 
@@ -9,7 +11,7 @@ SAVE_HDF = True
 if SAVE_HDF:
     import tables
 
-    SAVEDIR = '/home/astraw/FULL_COMPARTMENT_SIM'
+    SAVEDIR = os.path.expanduser('~/FULL_COMPARTMENT_SIM')
     #SAVEDIR = '/home/astraw/SMALL_COMPARTMENT_SIM'
     
 import fsee.eye_geometry.cyl_proj as cyl_proj
@@ -184,22 +186,22 @@ def doit(args):
     weights_B = emd_sim.get_values('weights_B')
     
     if 1:
-        imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.UInt8)
+        imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.uint8)
     else:
         # avoid MemoryError in scipy at the moment
-        #imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.UInt8)
-        imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.UInt8)
+        #imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.uint8)
+        imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.uint8)
         imnx = np.asarray(imnx)
-    imnp.shape = im.size[1], im.size[0], 3
-    print fname, imnp.shape
+    imnx.shape = im.size[1], im.size[0], 3
+    print fname, imnx.shape
 
-    dtype = np.Float
-    #dtype = np.UInt8
+    dtype = np.float
+    #dtype = np.uint8
 
     i2 = imnx[:,:,1]
     im2r = Im2R(i2.shape,dtype)
     shifted = np.ones( i2.shape, dtype ) # uses nd_image
-    emds = np.zeros( emds_shape, np.Float )
+    emds = np.zeros( emds_shape, np.float )
     ni = im2r(shifted)
 
     if DBG:
