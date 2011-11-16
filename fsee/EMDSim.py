@@ -453,6 +453,7 @@ class EMDSim:
         self.emd_outputs = None
 
         self._earlyvis = None
+        self._early_contrast_saturated = None
         self._D = None
         self._U = None
         self._subunit_A_Bd = None
