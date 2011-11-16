@@ -25,7 +25,6 @@ import os
 import numpy
 import scipy
 import scipy.sparse
-import cgkit # cgkit 2.x (hack to include this but necessary for eval test)
 
 # include this in files:
 # import os
