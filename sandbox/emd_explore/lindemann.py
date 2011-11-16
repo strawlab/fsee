@@ -1,7 +1,5 @@
 import glob, os, math
 import Image
-import numarray.nd_image as nd_image
-import numarray # needed for nd_image
 import numpy as nx
 import scipy.signal as signal
 import pickle
@@ -27,15 +25,15 @@ if DBG:
 class Im2R:
     def __init__(self,active_imshape,dtype):
         self.dtype = dtype
-        self.im = nx.zeros( cyl_proj.imshape, self.dtype )
+        self.im = np.zeros( cyl_proj.imshape, self.dtype )
         height_diff = cyl_proj.imshape[0]-active_imshape[0]
         self.start_i = height_diff//2
         self.end_i = self.start_i+active_imshape[0]
-        self.extent = nx.array((cyl_proj.imphi[0], cyl_proj.imphi[-1],
+        self.extent = np.array((cyl_proj.imphi[0], cyl_proj.imphi[-1],
                                 cyl_proj.imtheta[self.start_i], cyl_proj.imtheta[self.end_i-1]))*R2D
     def __call__(self,image):
         self.im[self.start_i:self.end_i,:]=image.astype(self.dtype)
-        im = nx.ravel(self.im)
+        im = np.ravel(self.im)
         resps = cyl_proj.im2receptors*im
         resps.shape = len(theta),len(phi)
         return resps
@@ -48,10 +46,10 @@ class Im2RFastButBroken:
         self.end_i = self.start_i+active_imshape[0]
         # slicing doesn't work (yet)
         self.im2receptors = cyl_proj.im2receptors[self.start_i:self.end_i,:]
-        self.extent = nx.array((cyl_proj.imphi[0], cyl_proj.imphi[-1],
+        self.extent = np.array((cyl_proj.imphi[0], cyl_proj.imphi[-1],
                                 cyl_proj.imtheta[self.start_i], cyl_proj.imtheta[self.end_i-1]))*R2D
     def __call__(self,image):
-        imflat = nx.ravel(image).astype(self.dtype)
+        imflat = np.ravel(image).astype(self.dtype)
         resps = self.im2receptors*imflat
         resps.shape = len(theta),len(phi)
         return resps
@@ -186,22 +184,22 @@ def doit(args):
     weights_B = emd_sim.get_values('weights_B')
     
     if 1:
-        imnx = nx.fromstring(im.tostring('raw','RGB',0,-1),nx.UInt8)
+        imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.UInt8)
     else:
         # avoid MemoryError in scipy at the moment
-        #imnx = nx.fromstring(im.tostring('raw','RGB',0,-1),nx.UInt8)
-        imnx = numarray.fromstring(im.tostring('raw','RGB',0,-1),numarray.UInt8)
-        imnx = nx.asarray(imnx)
-    imnx.shape = im.size[1], im.size[0], 3
-    print fname, imnx.shape
+        #imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.UInt8)
+        imnx = np.fromstring(im.tostring('raw','RGB',0,-1),np.UInt8)
+        imnx = np.asarray(imnx)
+    imnp.shape = im.size[1], im.size[0], 3
+    print fname, imnp.shape
 
-    dtype = nx.Float
-    #dtype = nx.UInt8
+    dtype = np.Float
+    #dtype = np.UInt8
 
     i2 = imnx[:,:,1]
     im2r = Im2R(i2.shape,dtype)
-    shifted = numarray.ones( i2.shape, dtype ) # uses nd_image
-    emds = nx.zeros( emds_shape, nx.Float )
+    shifted = np.ones( i2.shape, dtype ) # uses nd_image
+    emds = np.zeros( emds_shape, np.Float )
     ni = im2r(shifted)
 
     if DBG:
@@ -216,13 +214,13 @@ def doit(args):
         pylab.subplot(7,1,2)
         pylab.title('retina')
         axim_ni = pylab.imshow( ni, vmin=0.0, vmax=255.0,
-                                extent=nx.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
+                                extent=np.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
         pylab.colorbar()
 
         pylab.subplot(7,1,3)
         pylab.title('earlyvis')
         axim_earlyvis = pylab.imshow( ni, vmin=-255.0, vmax=255.0,
-                                      extent=nx.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
+                                      extent=np.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
         pylab.colorbar()
 
 ##        vmin=-(255.0**2)
@@ -232,13 +230,13 @@ def doit(args):
         pylab.subplot(7,1,4)
         pylab.title('delayed')
         axim_delayed = pylab.imshow( ni, vmin=vmin, vmax=vmax,
-                                     extent=nx.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
+                                     extent=np.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
         pylab.colorbar()
 
         pylab.subplot(7,1,5)
         pylab.title('undelayed')
         axim_undelayed = pylab.imshow( ni, vmin=vmin, vmax=vmax,
-                                     extent=nx.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
+                                     extent=np.array((phi[0],phi[-1],theta[0],theta[-1]))*R2D )
         pylab.colorbar()
 
         vmin=-(255.0**2)
@@ -269,22 +267,22 @@ def doit(args):
         # (With this gain, the conductances roughly match his.)
         ni = ni*5.5
 
-        emds = emd_sim.step( nx.ravel(ni) )
+        emds = emd_sim.step( np.ravel(ni) )
 
         subunit_A_Bd = emd_sim.get_values('subunit_A_Bd')
         subunit_Ad_B = emd_sim.get_values('subunit_Ad_B')
         
         if 0:
-            print 'nx.sum(nx.ravel(ni))',nx.sum(nx.ravel(ni))
+            print 'np.sum(np.ravel(ni))',np.sum(np.ravel(ni))
             for n in ['earlyvis','delayed','undelayed','subunit_A_Bd']:
-                print n,nx.sum(nx.ravel(emd_sim.get_values(n)))
+                print n,np.sum(np.ravel(emd_sim.get_values(n)))
             # rectify
-            re = nx.where( subunit_A_Bd > 0, subunit_A_Bd , 0 )
-            ri = nx.where( subunit_Ad_B > 0, subunit_Ad_B , 0 )
+            re = np.where( subunit_A_Bd > 0, subunit_A_Bd , 0 )
+            ri = np.where( subunit_Ad_B > 0, subunit_Ad_B , 0 )
 
-            print 'nx.nonzero(re).shape',nx.nonzero(re).shape
-            ge = nx.sum(weights_A*re)
-            gi = nx.sum(weights_B*ri)
+            print 'np.nonzero(re).shape',np.nonzero(re).shape
+            ge = np.sum(weights_A*re)
+            gi = np.sum(weights_B*ri)
             print 'ge',ge
             print 'gi',gi
             print
@@ -295,9 +293,9 @@ def doit(args):
         # save conductance for full compartmental model
         row = saver.row
         row['cur_time'] = cur_time
-        row['directionA'] = numarray.asarray( subunit_A_Bd )
-        row['directionB'] = numarray.asarray( subunit_Ad_B )
-        row['EMD_outputs'] = numarray.asarray( emds )
+        row['directionA'] = np.asarray( subunit_A_Bd )
+        row['directionB'] = np.asarray( subunit_Ad_B )
+        row['EMD_outputs'] = np.asarray( emds )
         row['Vm'] = Vm
         row.append()
         saver.flush()
