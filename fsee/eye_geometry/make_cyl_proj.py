@@ -63,13 +63,9 @@ for j,phi_j in enumerate(phi):
     horiz_gaussians[j,:] = numpy.exp(-zetah**2/sigma2)
 
 
-SLOW_BUT_SAFE = 0
+SLOW_BUT_SAFE = 1
 if SLOW_BUT_SAFE:
-    im2receptors = scipy.sparse.dok_matrix()
-    
-    # force shape we want
-    im2receptors[imlen-1,n_receptors-1]=1
-    im2receptors[imlen-1,n_receptors-1]=0
+    im2receptors = scipy.sparse.dok_matrix((imlen,n_receptors), numpy.float32)
 else:
     im2receptors = []
 eps = 1e-4
@@ -88,7 +84,7 @@ for i,theta_i in enumerate(theta):
         if sumim < eps:
             continue
         full_im = full_im / sumim # make sum to 1
-        im_idxs = numpy.nonzero(full_im>eps) # index into image
+        im_idxs = numpy.nonzero(full_im>eps)[0] # index into image
         if len(im_idxs):
             print 'R_idx %d significant entries (starts at %d) for receptor %d (of %d)'%(
                 len(im_idxs),
