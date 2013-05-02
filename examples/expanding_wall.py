@@ -1,11 +1,11 @@
 # Copyright (C) 2010 California Institute of Technology, All rights reserved
 # Author: Andrew D. Straw
-import os 
+import os
 import cgtypes # cgkit 1.x
 
 from matplotlib import rcParams
 
-rcParams['svg.embed_char_paths'] = False
+rcParams['svg.fonttype'] = 'none' # No text as paths. Assume font installed.
 rcParams['font.family'] = 'sans-serif'
 rcParams['font.sans-serif'] = ['Arial'] # lucid: ttf-mscorefonts-installer
 
