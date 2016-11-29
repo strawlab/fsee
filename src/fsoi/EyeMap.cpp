@@ -42,7 +42,7 @@ void EyeMap::createDrawables() {
 
   faces->setVertexArray(_verts.get());
   faces->setColorArray(_colors.get());
-  faces->setColorBinding(osg::Geometry::BIND_PER_PRIMITIVE);
+  faces->setColorBinding(osg::Geometry::BIND_PER_PRIMITIVE_SET);
 
   // Normal
   osg::ref_ptr<osg::Vec3Array> ns(new osg::Vec3Array);
