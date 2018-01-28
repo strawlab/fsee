@@ -11,5 +11,7 @@ To install, one must run the non-standard step of building fsoi with scons befor
 
     cd src/fsoi
     scons
+    cd ../../fsee/eye_geometry
+    make
     cd ../..
     python setup.py install
