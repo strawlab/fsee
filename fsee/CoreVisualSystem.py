@@ -303,9 +303,9 @@ class CoreVisualSystem:
             imnx[yi0:yi1,xi0:xi1,:] = self.last_optical_images['posz']
 
             if nchan == 3:
-                im = Image.fromstring('RGB',(imnx.shape[1],imnx.shape[0]),imnx.tostring())
+                im = Image.frombytes('RGB',(imnx.shape[1],imnx.shape[0]),imnx.tostring())
             elif nchan == 4:
-                im = Image.fromstring('RGBA',(imnx.shape[1],imnx.shape[0]),imnx.tostring())
+                im = Image.frombytes('RGBA',(imnx.shape[1],imnx.shape[0]),imnx.tostring())
             im = im.transpose( Image.FLIP_TOP_BOTTOM )
             self.last_environment_map = im
         return self.last_environment_map
