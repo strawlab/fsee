@@ -1,6 +1,6 @@
 from __future__ import division
 import os
-from scikits import delaunay
+from matplotlib import delaunay
 from emd_util import find_edges
 from drosophila_eye_map.precompute_buchner71_optics import x,y
 import drosophila_eye_map.precomputed_buchner71 as optics
