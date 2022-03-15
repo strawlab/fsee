@@ -22,7 +22,7 @@ public:
   void setColors(osg::Vec4Array* cs);
   void setGeometry( osg::Vec3Array* verts, osg::ByteArray* fan_lengths );
 private:
-  void createDrawables();
+  void createDrawables(bool);
   osg::ref_ptr<osg::Geometry> faces;
   osg::ref_ptr<osg::Vec4Array> _colors;
   osg::ref_ptr<osg::Vec3Array> _verts;

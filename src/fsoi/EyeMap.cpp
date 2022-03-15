@@ -29,13 +29,16 @@ EyeMap::EyeMap( ) {
   _fan_lengths->push_back( 6 );
   _fan_lengths->push_back( 6 );
 
-  createDrawables();
+  createDrawables(true);
 }
 
-void EyeMap::createDrawables() {
+void EyeMap::createDrawables(bool isBeingConstructed=false) { //extra parameter to avoid accessing _drawables from constructor (not declared yet)
   // Remove any existing Drawables
-  _drawables.erase(_drawables.begin(), _drawables.end());
-
+  if(!isBeingConstructed){
+  //_drawables.erase(_drawables.begin(), _drawables.end());
+    this->removeDrawables(0, this->getNumDrawables());
+  }
+  
   // 1. First the faces
   faces = new osg::Geometry();
   faces->setSupportsDisplayList(false);

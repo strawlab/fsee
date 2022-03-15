@@ -14,7 +14,7 @@ if int(debug):
 def add_osg_opts(kws):
     if sys.platform.startswith('darwin'):
         if os.path.exists('/opt/local/include/osg'):
-            print "Using Macports's OSG version in /opt/local"
+            print("Using Macports's OSG version in /opt/local")
             env.Append(CPPPATH=['/opt/local/include/'],
                        LIBPATH=['/opt/local/lib/'], 
                        LIBS=['osg', 'OpenThreads', 'osgText', 'osgDB', 'osgUtil', 'osgGA', 'osgViewer'])

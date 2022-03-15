@@ -724,7 +724,7 @@ FsoiErr fsoi_ng_new(FsoiObj** theobjptr, const char* filename, double scale,
   } else if (!strcmp(render_implementation,"fb")) {
     renderImplementation= osg::Camera::FRAME_BUFFER;
   } else if (!strcmp(render_implementation,"window")) {
-    renderImplementation= osg::Camera::SEPERATE_WINDOW;
+    renderImplementation= osg::Camera::SEPARATE_WINDOW;//modif from SEPERATE_WINDOW
   } else {
     fprintf(stderr,"unknown render target: %s\n",render_implementation);
     return FsoiUnknownRenderImplementeation;
